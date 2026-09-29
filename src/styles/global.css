@@ -11,24 +11,20 @@
   --blue-dark:   #152E70;
   --blue-glow:   rgba(30, 58, 138, 0.15);
   --blue-light:  #EEF2FF;
-
   --gold:        #F5C518;
   --gold-dark:   #D4A820;
   --gold-light:  #FEF9DC;
   --gold-glow:   rgba(245, 197, 24, 0.18);
-
   --white: #FFFFFF;
   --gray-light: #F8FAFC;
   --gray:       #E2E8F0;
   --text-dark:  #1E293B;
   --text-mid:   #475569;
   --text-light: #64748B;
-
   --shadow-sm: 0 2px 8px rgba(30, 58, 138, 0.06);
   --shadow-md: 0 4px 20px rgba(30, 58, 138, 0.09);
   --shadow-lg: 0 8px 32px rgba(30, 58, 138, 0.12);
   --shadow-xl: 0 16px 48px rgba(30, 58, 138, 0.14);
-
   --radius-sm: 8px;
   --radius-md: 14px;
   --radius-lg: 20px;
@@ -42,6 +38,7 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
+
 
 /* ─── SCROLL REVEAL ──────────────────────────────────────────────── */
 .sr {
