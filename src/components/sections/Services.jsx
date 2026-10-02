@@ -1,6 +1,5 @@
 // src/components/sections/Services.jsx
 import { useCallback } from "react";
-import React from "react";
 import rekLogo from "../../assets/images/Logo Yobante Rek.png";
 import boutiqueLogo from "../../assets/images/Logo Yobante Boutique.png";
 import {
@@ -273,7 +272,7 @@ const Services = ({ scrollTo, variant = 'rek' }) => {
 
       </div>
 
-      <style jsx>{`
+      <style>{`
         * { box-sizing: border-box; }
 
         .section {

@@ -1,11 +1,12 @@
 // src/components/sections/Hero.jsx
 
-import { useState, useEffect } from 'react';
-import { Package, ShoppingBag, Plane, Ship, ArrowRight } from 'lucide-react';
+import { useState } from 'react';
+import { Package, ShoppingBag, Plane, ArrowRight, ShieldCheck, Timer, Tag, Smartphone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import deliveryPhone from '../../assets/images/mockeup.png';
 import deliveryPhone2 from '../../assets/images/mockeup2.png';
+import rekHeroImage from '../../assets/images/rek.png';
 
 const AppStoreIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -21,16 +22,6 @@ const PlayStoreIcon = () => (
 
 const Hero = ({ scrollTo, variant = 'rek' }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isMobile, setIsMobile] = useState(() =>
-    typeof window !== 'undefined' ? window.innerWidth <= 980 : false
-  );
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 980);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   const slides = [
     {
       id: 1,
@@ -38,7 +29,7 @@ const Hero = ({ scrollTo, variant = 'rek' }) => {
       buttonText: "En savoir plus",
       buttonLink: "services",
       image: deliveryPhone2,
-      bgColor: "#F5C518",
+      bgColor: "#ffffff",
       textColor: "#1E3A8A",
       statColor: "#1E3A8A",
       labelColor: "rgba(30,58,138,0.65)",
@@ -68,7 +59,7 @@ const Hero = ({ scrollTo, variant = 'rek' }) => {
   const current = visibleSlides[currentSlide] || visibleSlides[0];
 
   return (
-    <section id="hero" className="hero">
+    <section id="hero" className="hero rek-hero">
 
       {/* BACKGROUND */}
       <motion.div
@@ -106,10 +97,10 @@ const Hero = ({ scrollTo, variant = 'rek' }) => {
           >
             {/* TEXT */}
             <div className="hero-text">
-              <div className="hero-badge" style={{ background: current.badgeBg }}>
+              <div className="hero-badge rek-badge" style={{ background: current.badgeBg }}>
                 <span className="badge-dot"></span>
                 <span style={{ color: current.badgeTextColor }}>
-                  Expédition de colis - Boutique en ligne
+                  Expédition de colis - Sénégal ↔ France
                 </span>
               </div>
 
@@ -122,42 +113,56 @@ const Hero = ({ scrollTo, variant = 'rek' }) => {
                   </>
                 ) : (
                   <>
-                    <span className="title-main">Expédiez vos</span>
-                    <span className="title-line-rek"><span className="title-colis">colis</span><span className="title-brand rek-title-brand">depuis chez vous !</span></span>
-                    <span className="title-footer rek-title-footer"><span className="title-footer-ak">AK</span><span className="title-footer-name">YOBANTE REK</span></span>
+                    <span className="rek-title-line">Vos colis <span>Sénégal ↔ France</span></span>
+                    <span className="rek-title-line">en toute simplicité !</span>
                   </>
                 )}
               </h1>
 
               {current.id === 1 && (
-                <div className="shipping-methods">
-                  <div className="method-card">
-                    <span className="method-icon"><Plane size={22} strokeWidth={1.5} color="#1E3A8A" /></span>
-                    <span className="method-name">Fret Aérien</span>
+                <p className="rek-description">
+                  Yobante Rek vous accompagne dans l'envoi de vos colis entre le Sénégal et la France.
+                  Rapide, sécurisé et à prix compétitif.
+                </p>
+              )}
+
+              {current.id === 1 && (
+                <div className="rek-benefits">
+                  <div className="rek-benefit">
+                    <span className="rek-benefit-icon"><ShieldCheck size={21} strokeWidth={2} /></span>
+                    <span><strong>Sécurité garantie</strong><small>Vos colis entre de bonnes mains</small></span>
                   </div>
-                  <div className="method-card">
-                    <span className="method-icon"><Ship size={22} strokeWidth={1.5} color="#1E3A8A" /></span>
-                    <span className="method-name">Fret Maritime</span>
+                  <div className="rek-benefit">
+                    <span className="rek-benefit-icon"><Timer size={21} strokeWidth={2} /></span>
+                    <span><strong>Livraison rapide</strong><small>En France et au Sénégal</small></span>
                   </div>
-                  <div className="method-card">
-                    <span className="method-icon"><Package size={22} strokeWidth={1.5} color="#1E3A8A" /></span>
-                    <span className="method-name">Colis GP</span>
+                  <div className="rek-benefit">
+                    <span className="rek-benefit-icon"><Tag size={21} strokeWidth={2} /></span>
+                    <span><strong>Prix compétitifs</strong><small>Des offres adaptées à vos besoins</small></span>
                   </div>
                 </div>
               )}
 
-              {/* BUTTON */}
-              <button
-                className={`hero-btn ${current.id === 1 ? 'expedition' : ''}`}
-                onClick={() => scrollTo(current.buttonLink)}
-              >
-                {current.buttonText}
-                <ArrowRight size={15} strokeWidth={2} style={{ marginLeft: '8px', verticalAlign: 'middle' }} />
-              </button>
+              {current.id === 1 ? (
+                <div className="rek-actions">
+                  <button className="hero-btn rek-primary" onClick={() => scrollTo('applications')}>
+                    <Smartphone size={17} strokeWidth={2} /> Télécharger l'application
+                    <ArrowRight size={16} strokeWidth={2} />
+                  </button>
+                  <button className="hero-btn rek-secondary" onClick={() => scrollTo('services')}>
+                    <Plane size={17} strokeWidth={2} /> Découvrir nos services
+                  </button>
+                </div>
+              ) : (
+                <button className="hero-btn" onClick={() => scrollTo(current.buttonLink)}>
+                  {current.buttonText}
+                  <ArrowRight size={15} strokeWidth={2} style={{ marginLeft: '8px', verticalAlign: 'middle' }} />
+                </button>
+              )}
 
               {/* STORES */}
               <div className="store-buttons">
-                <a href="https://apps.apple.com" target="_blank" rel="noreferrer" className={`store-btn ${current.id === 1 ? 'appstore' : 'appstore-white'}`}>
+                <a href="https://apps.apple.com" target="_blank" rel="noreferrer" className={`store-btn ${current.id === 1 ? 'appstore rek-store' : 'appstore-white'}`}>
                   <AppStoreIcon />
                   <div className="store-text">
                     <small>Télécharger sur</small>
@@ -168,7 +173,7 @@ const Hero = ({ scrollTo, variant = 'rek' }) => {
                   href="https://play.google.com"
                   target="_blank"
                   rel="noreferrer"
-                  className={`store-btn ${current.id === 1 ? 'play-gold' : 'play-white'}`}
+                  className={`store-btn ${current.id === 1 ? 'play-gold rek-store' : 'play-white'}`}
                 >
                   <PlayStoreIcon />
                   <div className="store-text">
@@ -181,8 +186,11 @@ const Hero = ({ scrollTo, variant = 'rek' }) => {
             </div>
 
             {/* IMAGE */}
-            <motion.div className="hero-image">
-              <img src={current.image} alt="Application mobile" />
+            <motion.div className="hero-image rek-visual">
+              <img
+                src={current.id === 1 ? rekHeroImage : current.image}
+                alt={current.id === 1 ? 'Livreur Yobante Rek, colis et application mobile' : 'Application mobile'}
+              />
             </motion.div>
           </motion.div>
         </AnimatePresence>
@@ -202,7 +210,7 @@ const Hero = ({ scrollTo, variant = 'rek' }) => {
         ))}
       </div>
 
-      <style jsx>{`
+      <style>{`
         .hero {
           position: relative;
           width: 100%;
@@ -394,7 +402,7 @@ const Hero = ({ scrollTo, variant = 'rek' }) => {
         }
         .title-line-rek { display: flex; align-items: baseline; width: max-content; max-width: 100%; white-space: nowrap; font-size: .78em; transform: translateX(-24px); }
         .title-colis { color: #ffffff; }
-        .rek-title-footer { flex-direction: column; align-items: center; gap: 0; margin-left: 16%; }
+        .rek-title-footer { flex-direction: column; align-items: center; align-self: center; gap: 0; margin: 10px 0 0; }
         .rek-title-footer .title-footer-ak { font-size: 1.35em; }
         .title-brand {
           margin-left: 24%;
@@ -612,7 +620,7 @@ const Hero = ({ scrollTo, variant = 'rek' }) => {
           .title-footer { margin-left: 8%; }
           .rek-title-brand { margin-left: 12px; }
           .title-line-rek { font-size: .68em; transform: translateX(-10px); }
-          .rek-title-footer { margin-left: 8%; }
+          .rek-title-footer { margin-left: 0; }
 
           .shipping-methods {
             grid-template-columns: repeat(2,1fr);
@@ -674,6 +682,194 @@ const Hero = ({ scrollTo, variant = 'rek' }) => {
           .hero-stats { gap: 20px; }
           .stat-number { font-size: 22px; }
           .stat-label { font-size: 11px; }
+        }
+
+        .rek-hero { background: #fff; }
+        .rek-hero .hero-bg {
+          z-index: 0;
+          pointer-events: none;
+          background: #fff;
+        }
+        .rek-hero .hero-glow { display: none; }
+        .rek-hero .hero-container {
+          max-width: 1600px;
+          padding: 105px 8.75% 38px;
+        }
+        .rek-hero .hero-content {
+          position: relative;
+          min-height: min(720px, calc(100vh - 86px));
+          align-items: center;
+        }
+        .rek-hero .hero-text {
+          position: relative;
+          z-index: 4;
+          flex: 0 0 47%;
+          max-width: 700px;
+          min-height: 0;
+          justify-content: center;
+        }
+        .rek-hero .hero-badge {
+          gap: 9px;
+          padding: 8px 14px;
+          margin-bottom: 20px;
+          border-radius: 999px;
+          background: #fff3ca !important;
+          color: #10264d;
+          font-size: 13px;
+        }
+        .rek-hero .badge-dot {
+          width: 18px;
+          height: 18px;
+          background: transparent;
+          box-shadow: none;
+          animation: none;
+        }
+        .rek-hero .badge-dot::before {
+          content: '';
+          display: block;
+          width: 9px;
+          height: 9px;
+          margin: 4px;
+          border: 2px solid #f5c518;
+          border-radius: 3px;
+          transform: rotate(45deg);
+        }
+        .rek-hero .hero-title {
+          display: flex;
+          flex-direction: column;
+          gap: 0;
+          margin: 0 0 16px;
+          color: #10264d !important;
+          font-size: clamp(38px, 3vw, 54px);
+          line-height: 1.04;
+          letter-spacing: -1.2px;
+        }
+        .rek-title-line { display: block; width: fit-content; max-width: 100%; }
+        .rek-title-line:first-child { white-space: nowrap; }
+        .rek-title-line:first-child span { color: #f5bd00; }
+        .rek-description {
+          max-width: 470px;
+          margin: 0 0 26px;
+          color: #65738b;
+          font-size: 16px;
+          line-height: 1.5;
+        }
+        .rek-benefits {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 16px;
+          max-width: 580px;
+          margin-bottom: 28px;
+        }
+        .rek-benefit { display: flex; flex-direction: column; gap: 9px; color: #10264d; }
+        .rek-benefit-icon {
+          display: grid;
+          width: 48px;
+          height: 48px;
+          place-items: center;
+          border-radius: 50%;
+          background: #fff2c3;
+          color: #10264d;
+        }
+        .rek-benefit strong { display: block; font-size: 13px; font-weight: 800; }
+        .rek-benefit small { display: block; max-width: 130px; margin-top: 4px; color: #728096; font-size: 12px; line-height: 1.35; }
+        .rek-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+        .rek-actions .hero-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 9px;
+          min-height: 50px;
+          margin: 0;
+          padding: 0 21px;
+          font-size: 14px;
+          white-space: nowrap;
+        }
+        .rek-primary { background: #f5c518; color: #10264d; }
+        .rek-secondary { border: 1.5px solid #183d7d; background: #fff; color: #183d7d; box-shadow: none; }
+        .rek-secondary:hover { background: #f5f8fc; box-shadow: none; }
+        .rek-hero .store-buttons { gap: 12px; margin-bottom: 0; }
+        .rek-hero .store-btn.rek-store {
+          min-width: 126px;
+          padding: 8px 12px;
+          border: 1px solid #303030;
+          border-radius: 7px;
+          background: #090909;
+          color: #fff;
+          box-shadow: none;
+        }
+        .rek-hero .store-btn.rek-store small { font-size: 8px; }
+        .rek-hero .store-btn.rek-store strong { font-size: 13px; }
+        .rek-hero .hero-image.rek-visual {
+          position: absolute;
+          inset: 0 min(-8.75vw, calc(660px - 50vw)) 0 50%;
+          z-index: 1;
+          overflow: hidden;
+          margin: 0;
+          align-items: stretch;
+          justify-content: flex-end;
+        }
+        .rek-hero .hero-image.rek-visual::before {
+          display: block;
+          content: '';
+          position: absolute;
+          inset: 0 auto 0 0;
+          width: 54%;
+          z-index: 2;
+          background: linear-gradient(90deg, #fff 0%, rgba(255,255,255,.98) 55%, rgba(255,255,255,0) 100%);
+        }
+        .rek-hero .hero-image.rek-visual img {
+          width: 100%;
+          height: 100%;
+          max-width: none;
+          object-fit: cover;
+          object-position: center;
+          transform: none;
+          filter: none;
+        }
+
+        @media (max-width: 980px) {
+          .rek-hero .hero-bg {
+            background: linear-gradient(180deg, #fff 0%, #fff 44%, rgba(255,255,255,.9) 56%, rgba(255,255,255,0) 68%);
+          }
+          .rek-hero .hero-container { padding: 108px 24px 42px; }
+          .rek-hero .hero-content { min-height: 0; flex-direction: column; gap: 26px; }
+          .rek-hero .hero-text { width: 100%; max-width: 650px; flex: 0 0 auto; }
+          .rek-hero .hero-title { font-size: clamp(36px, 6vw, 48px); }
+          .rek-title-line:first-child { white-space: normal; }
+          .rek-description { max-width: 560px; }
+          .rek-benefits { width: 100%; max-width: 580px; text-align: left; }
+          .rek-hero .hero-image.rek-visual {
+            position: relative;
+            inset: auto;
+            width: calc(100% + 48px);
+            height: min(62vw, 430px);
+            min-height: 280px;
+            margin: 0 -24px;
+          }
+          .rek-hero .hero-image.rek-visual::before { display: none; }
+          .rek-hero .hero-image.rek-visual img { object-position: right center; }
+        }
+
+        @media (max-width: 520px) {
+          .rek-hero .hero-container { padding: 100px 18px 32px; }
+          .rek-hero .hero-title { font-size: 34px; line-height: 1.08; }
+          .rek-badge { font-size: 11px !important; }
+          .rek-description { font-size: 14px; margin-bottom: 20px; }
+          .rek-benefits { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-bottom: 22px; }
+          .rek-benefit { gap: 7px; }
+          .rek-benefit-icon { width: 40px; height: 40px; }
+          .rek-benefit strong { font-size: 11px; }
+          .rek-benefit small { font-size: 10px; }
+          .rek-actions { width: 100%; flex-direction: column; gap: 10px; }
+          .rek-actions .hero-btn { width: 100%; max-width: 360px; }
+          .rek-hero .store-buttons { width: 100%; max-width: 360px; flex-direction: row; justify-content: flex-start; gap: 8px; }
+          .rek-hero .store-btn.rek-store { min-width: 0; flex: 1; padding: 8px; }
+          .rek-hero .hero-image.rek-visual { height: 300px; min-height: 260px; }
+        }
+
+        @media (min-width: 981px) and (max-width: 1100px) {
+          .rek-hero .hero-image.rek-visual { left: 58%; }
         }
 
       `}</style>

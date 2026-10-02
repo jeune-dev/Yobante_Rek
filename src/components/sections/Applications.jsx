@@ -1,25 +1,25 @@
 // src/components/sections/Applications.jsx
-import { useEffect, useState } from 'react';
 import expeditionLogo from '../../assets/images/Logo Yobante Rek - fond blanc.PNG';
 import boutiqueLogo from '../../assets/images/Logo Yobante Boutique - Fond Blanc.PNG';
+import { Package, ShoppingBag, Smartphone, Zap, ShieldCheck, ArrowRight } from 'lucide-react';
 import appli1 from '../../assets/images/Appli1.png';
 import appli2 from '../../assets/images/Appli2.png';
-import { Package, ShoppingBag } from 'lucide-react';
+import appli3 from '../../assets/images/APPLI3.png';
 
 const appsData = [
   {
     id: "expedition",
     logo: expeditionLogo,
     alt: "Yobanté Expédition",
-    chipIcon: <Package size={14} strokeWidth={1.8} />,
-    chipText: "Expédition & Suivi",
+    chipIcon: <Smartphone size={15} strokeWidth={1.8} />,
+    chipText: "Application mobile",
     chipClass: "expedition",
     title: "YOBANTÉ Expédition",
     description: "Gérez vos envois entre la France et le Sénégal de manière rapide, sécurisée et transparente. Simulez votre envoi, payez en ligne et suivez chaque étape depuis une seule application.",
     features: [
-      "Simulez votre envoi",
-      "Payez en toute sécurité",
-      "Suivez l'acheminement de votre envoi"
+      { icon: <Zap size={23} strokeWidth={2.4} />, title: "Simulez votre envoi", description: "Estimez le coût de votre colis en quelques clics." },
+      { icon: <ShieldCheck size={23} strokeWidth={2.2} />, title: "Paiement sécurisé", description: "Transactions fiables et 100 % sécurisées." },
+      { icon: <Package size={23} strokeWidth={2.2} />, title: "Suivez votre envoi", description: "De l'enlèvement à la livraison, restez informé." }
     ],
     iosUrl: "https://apps.apple.com",
     androidUrl: "https://play.google.com"
@@ -44,26 +44,17 @@ const appsData = [
 ];
 
 const Applications = ({ variant = 'rek' }) => {
-  const [imageIndex, setImageIndex] = useState(0);
   const visibleApps = appsData.filter((app) => variant === 'rek' ? app.id === 'expedition' : app.id === 'boutique');
-  const appImages = [appli1, appli2];
-
-  useEffect(() => {
-    if (variant !== 'rek') return undefined;
-    const timer = window.setInterval(() => {
-      setImageIndex((currentIndex) => (currentIndex + 1) % appImages.length);
-    }, 5000);
-    return () => window.clearInterval(timer);
-  }, [variant]);
+  const appImages = variant === 'rek' ? [appli3] : [appli1, appli2];
 
   return (
-    <section id="apps" className="apps-section">
+    <section id="apps" className={`apps-section ${variant === 'rek' ? 'apps-rek' : ''}`}>
       <div className="bg-glow glow-1"></div>
       <div className="bg-glow glow-2"></div>
 
       <div className="container">
         {/* HEADER */}
-        <div className="section-header sr">
+        <div className={`section-header sr ${variant === 'rek' ? 'section-header-rek' : ''}`}>
           <div className="section-badge">
             <span className="tag-line"></span>
             Notre Application mobile
@@ -78,7 +69,7 @@ const Applications = ({ variant = 'rek' }) => {
         {/* CARDS */}
         <div className="apps-grid">
           {visibleApps.map((app, i) => (
-            <div id={`app-${app.id}`} key={app.id} className={`app-card sr sr-d${i + 1}`}>
+            <div id={`app-${app.id}`} key={app.id} className={`app-card ${app.id === 'expedition' ? 'app-card-expedition' : ''} sr sr-d${i + 1}`}>
               <div className="card-glow"></div>
 
               <div className="card-inner">
@@ -91,13 +82,29 @@ const Applications = ({ variant = 'rek' }) => {
                   {app.chipText}
                 </div>
 
+                {app.id === 'expedition' && (
+                  <h2 className="expedition-title">Téléchargez <span>Yobanté dès maintenant !</span></h2>
+                )}
+
                 <p>{app.description}</p>
 
-                <ul className="app-features">
-                  {app.features.map((feature, j) => (
-                    <li key={j}>{feature}</li>
-                  ))}
-                </ul>
+                {app.id === 'expedition' ? (
+                  <div className="expedition-features">
+                    {app.features.map((feature) => (
+                      <div className="expedition-feature" key={feature.title}>
+                        <span className="expedition-feature-icon">{feature.icon}</span>
+                        <strong>{feature.title}</strong>
+                        <small>{feature.description}</small>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <ul className="app-features">
+                    {app.features.map((feature, j) => (
+                      <li key={j}>{feature}</li>
+                    ))}
+                  </ul>
+                )}
               </div>
 
               <div className="download-buttons" style={{ padding: '0 34px' }}>
@@ -108,7 +115,8 @@ const Applications = ({ variant = 'rek' }) => {
                   <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" style={{ marginRight: '7px', verticalAlign: 'middle' }}>
                     <path d="M18.71,19.5C17.88,20.74 17,21.95 15.66,22c-1.31,0.05-1.73,-0.75-3.23,-0.75c-1.49,0-1.96,0.73,-3.22,0.78c-1.33,0.05-2.29,-1.32-3.13,-2.53C4.37,17.18 3.05,12.35 4.81,9.31c0.88,-1.52 2.45,-2.48 4.16,-2.51c1.3,-0.02 2.53,0.88 3.32,0.88c0.79,0 2.27,-1.07 3.82,-0.91c0.65,0.03 2.47,0.26 3.64,1.98c-0.09,0.06 -2.17,1.28 -2.15,3.81c0.03,3.02 2.65,4.03 2.68,4.04c-0.03,0.07 -0.42,1.44 -1.38,2.83M15.97,4.17C16.63,3.37 17.07,2.28 16.95,1c-1.09,0.04 -2.41,0.72 -3.19,1.63c-0.67,0.77 -1.25,1.88 -1.09,3.14c1.21,0.09 2.47,-0.6 3.3,-1.6" />
                   </svg>
-                  App Store
+                  {app.id === 'expedition' ? <span><small>Télécharger sur</small><strong>App Store</strong></span> : 'App Store'}
+                  {app.id === 'expedition' && <ArrowRight size={17} />}
                 </button>
                 <button
                   className="download-btn android"
@@ -120,19 +128,20 @@ const Applications = ({ variant = 'rek' }) => {
                     <path d="M13.12,12l4.73-2.5L20.4,11c0.41,0.22,0.6,0.69,0.44,1.12c-0.11,0.31-0.4,0.53-0.74,0.53c-0.09,0-0.18-0.02-0.26-0.05l-2.13-1.1Z" />
                     <path d="M13.12,12l-9.24,8.86c0.15,0.14,0.54,0.19,0.88,0.02l13.09-6.38Z" />
                   </svg>
-                  Google Play
+                  {app.id === 'expedition' ? <span><small>Disponible sur</small><strong>Google Play</strong></span> : 'Google Play'}
+                  {app.id === 'expedition' && <ArrowRight size={17} />}
                 </button>
               </div>
 
               <div className="app-visual">
-                <img key={appImages[imageIndex]} src={appImages[imageIndex]} alt={app.alt} />
+                <img src={appImages[0]} alt={app.id === 'expedition' ? 'Application Yobante Rek avec trajet Sénégal-France' : app.alt} />
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .card-inner { padding: 34px 34px 0; display: flex; flex-direction: column; flex: 1; }
 
         .apps-section {
@@ -368,6 +377,163 @@ const Applications = ({ variant = 'rek' }) => {
           .download-btn { width: 100%; padding: 13px 18px; }
           .section-title { font-size: 28px; }
           .app-card h3 { font-size: 22px; }
+        }
+
+        .apps-section.apps-rek { min-height: 100vh; padding: 0; background: #fff; }
+        .apps-rek .bg-glow,
+        .apps-rek .section-header-rek { display: none; }
+        .apps-rek .container { width: 100%; max-width: none; margin: 0; padding: 0; }
+        .apps-rek .apps-grid { display: block; width: 100%; margin: 0; }
+        .apps-rek .app-card-expedition {
+          position: relative;
+          display: grid;
+          grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+          grid-template-rows: 1fr auto;
+          width: 100%;
+          min-height: min(920px, 100vh);
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+          border: 0;
+          border-radius: 0;
+          background: #fff;
+          box-shadow: none;
+          backdrop-filter: none;
+          transform: none;
+          transition: none;
+        }
+        .apps-rek .app-card-expedition:hover { transform: none; box-shadow: none; }
+        .apps-rek .app-card-expedition::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          z-index: 1;
+          pointer-events: none;
+          background: linear-gradient(90deg, transparent 47%, rgba(255,255,255,.88) 59%, #fff 70%);
+        }
+        .apps-rek .app-card-expedition .card-glow,
+        .apps-rek .app-card-expedition .app-logo-container { display: none; }
+        .apps-rek .app-card-expedition .card-inner {
+          position: relative;
+          z-index: 2;
+          grid-column: 2;
+          grid-row: 1;
+          justify-content: center;
+          padding: 60px clamp(34px, 5vw, 92px) 24px;
+        }
+        .apps-rek .app-chip.expedition { align-self: flex-start; margin: 0 0 24px; padding: 9px 16px; background: #fff3ca; color: #123679; border: 0; font-size: 13px; }
+        .expedition-title {
+          margin: 0 0 20px;
+          color: #103b80;
+          font-size: clamp(38px, 3.1vw, 54px);
+          font-weight: 900;
+          line-height: 1.03;
+        }
+        .expedition-title span { display: block; color: #f5c518; }
+        .apps-rek .app-card-expedition .card-inner > p {
+          max-width: 610px;
+          margin: 0 0 28px;
+          color: #173b72;
+          font-size: clamp(15px, 1.35vw, 19px);
+          line-height: 1.5;
+        }
+        .expedition-features {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 18px;
+          max-width: 660px;
+          margin-bottom: 30px;
+        }
+        .expedition-feature { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; color: #123679; }
+        .expedition-feature-icon {
+          display: grid;
+          width: 52px;
+          height: 52px;
+          place-items: center;
+          margin-bottom: 2px;
+          border-radius: 50%;
+          background: #ffdf45;
+          color: #123679;
+        }
+        .expedition-feature strong { font-size: 14px; font-weight: 800; line-height: 1.2; }
+        .expedition-feature small { max-width: 170px; color: #587096; font-size: 13px; line-height: 1.35; }
+        .apps-rek .app-card-expedition .download-buttons {
+          position: relative;
+          z-index: 2;
+          grid-column: 2;
+          grid-row: 2;
+          gap: 14px;
+          padding: 0 clamp(34px, 5vw, 92px) 48px !important;
+          margin: 0;
+        }
+        .apps-rek .app-card-expedition .download-btn {
+          min-height: 66px;
+          gap: 10px;
+          padding: 9px 16px;
+          border-radius: 11px;
+          background: #050505;
+          color: #fff;
+          text-align: left;
+        }
+        .apps-rek .app-card-expedition .download-btn span { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.08; }
+        .apps-rek .app-card-expedition .download-btn span small { font-size: 10px; font-weight: 500; opacity: .88; }
+        .apps-rek .app-card-expedition .download-btn span strong { font-size: 18px; font-weight: 700; }
+        .apps-rek .app-card-expedition .download-btn > svg:last-child { margin-left: auto; }
+        .apps-rek .app-card-expedition .app-visual {
+          position: absolute;
+          inset: 0 auto 0 0;
+          z-index: 0;
+          display: block;
+          grid-column: 1;
+          grid-row: 1 / -1;
+          width: 62%;
+          min-height: 0;
+          padding: 0;
+          overflow: hidden;
+          background: #eaf5ff;
+        }
+        .apps-rek .app-card-expedition .app-visual img {
+          display: block;
+          width: 100%;
+          max-width: none;
+          height: 100%;
+          object-fit: cover;
+          object-position: center center;
+          filter: none;
+          transform: none;
+          animation: none;
+        }
+
+        @media (max-width: 760px) {
+          .apps-section.apps-rek { min-height: 0; }
+          .apps-rek .app-card-expedition { display: flex; flex-direction: column; min-height: 0; }
+          .apps-rek .app-card-expedition::before { display: none; }
+          .apps-rek .app-card-expedition .app-visual {
+            position: relative;
+            inset: auto;
+            order: 0;
+            width: 100%;
+            height: auto;
+            min-height: 0;
+            aspect-ratio: 1.218;
+          }
+          .apps-rek .app-card-expedition .app-visual img { object-position: center center; }
+          .apps-rek .app-card-expedition .card-inner { order: 1; padding: 30px 22px 0; }
+          .apps-rek .app-chip.expedition { margin-bottom: 18px; }
+          .expedition-title { max-width: 560px; font-size: clamp(36px, 8vw, 52px); }
+          .apps-rek .app-card-expedition .card-inner > p { margin-bottom: 24px; font-size: 15px; }
+          .expedition-features { grid-template-columns: 1fr; gap: 16px; margin-bottom: 24px; }
+          .expedition-feature { display: grid; grid-template-columns: 46px minmax(0, 1fr); column-gap: 12px; row-gap: 3px; align-items: center; }
+          .expedition-feature-icon { grid-row: span 2; width: 42px; height: 42px; margin: 0; }
+          .expedition-feature strong { font-size: 14px; }
+          .expedition-feature small { max-width: none; }
+          .apps-rek .app-card-expedition .download-buttons { order: 2; padding: 0 22px 32px !important; gap: 10px; }
+          .apps-rek .app-card-expedition .download-btn { min-height: 60px; padding: 8px 10px; }
+          .apps-rek .app-card-expedition .download-btn span strong { font-size: 15px; }
+        }
+
+        @media (max-width: 390px) {
+          .apps-rek .app-card-expedition .download-buttons { flex-direction: column; }
         }
       `}</style>
     </section>
