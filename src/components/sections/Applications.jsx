@@ -1,10 +1,10 @@
 // src/components/sections/Applications.jsx
-import expeditionLogo from '../../assets/images/Logo Yobante Rek - fond blanc.PNG';
-import boutiqueLogo from '../../assets/images/Logo Yobante Boutique - Fond Blanc.PNG';
+import expeditionLogo from '../../assets/images/Logo Yobante Rek - fond blanc.webp';
+import boutiqueLogo from '../../assets/images/Logo Yobante Boutique - Fond Blanc.webp';
 import { Package, ShoppingBag, Smartphone, Zap, ShieldCheck, ArrowRight } from 'lucide-react';
-import appli1 from '../../assets/images/Appli1.png';
+import appli1 from '../../assets/images/Appli1.webp';
 import appli2 from '../../assets/images/Appli2.png';
-import appli3 from '../../assets/images/APPLI3.png';
+import appli3 from '../../assets/images/APPLI3.webp';
 
 const appsData = [
   {
@@ -55,10 +55,10 @@ const Applications = ({ variant = 'rek' }) => {
       <div className="container">
         {/* HEADER */}
         <div className={`section-header sr ${variant === 'rek' ? 'section-header-rek' : ''}`}>
-          <div className="section-badge">
+          <h2 className="section-badge">
             <span className="tag-line"></span>
             Notre Application mobile
-          </div>
+          </h2>
           <p className="section-subtitle">
             {variant === 'rek'
               ? "Une application mobile pensée pour gérer vos expéditions en quelques gestes, du calcul du tarif au suivi de la livraison."
@@ -134,7 +134,7 @@ const Applications = ({ variant = 'rek' }) => {
               </div>
 
               <div className="app-visual">
-                <img src={appImages[0]} alt={app.id === 'expedition' ? 'Application Yobante Rek avec trajet Sénégal-France' : app.alt} />
+                <img src={appImages[0]} alt={app.id === 'expedition' ? 'Application Yobante Rek avec trajet Sénégal-France' : app.alt} width="1460" height="1078" loading="lazy" decoding="async" />
               </div>
             </div>
           ))}
@@ -147,26 +147,23 @@ const Applications = ({ variant = 'rek' }) => {
         .apps-section {
           position: relative;
           overflow: hidden;
-          padding: 100px 0;
+          padding: var(--section-y) 0;
           background: #f8fbff;
         }
 
-        .container {
-          position: relative; z-index: 5;
-          max-width: none; margin: 0 auto; padding: 0 24px;
-        }
+        .apps-section .section-header { text-align: center; margin-bottom: clamp(36px, 5vw, 56px); }
 
-        .bg-glow {
+        .apps-section .bg-glow {
           position: absolute; border-radius: 50%;
           filter: blur(120px); opacity: .3; pointer-events: none;
         }
-        .glow-1 { width: 450px; height: 450px; background: #1E3A8A; top: -130px; left: -80px; }
-        .glow-2 { width: 380px; height: 380px; background: #F5C518; bottom: -100px; right: -80px; }
+        .apps-section .glow-1 { width: 450px; height: 450px; background: #1E3A8A; top: -130px; left: -80px; }
+        .apps-section .glow-2 { width: 380px; height: 380px; background: #F5C518; bottom: -100px; right: -80px; }
 
         .section-badge {
           display: inline-flex; align-items: center; gap: 12px;
           margin-bottom: 18px; color: #1E3A8A;
-          font-size: 18px; font-weight: 800;
+          font-size: clamp(13px, 3.6vw, 18px); font-weight: 800;
           letter-spacing: 2px; text-transform: uppercase;
           background: rgba(30,58,138,0.06);
           padding: 9px 18px; border-radius: 999px;
@@ -332,6 +329,7 @@ const Applications = ({ variant = 'rek' }) => {
 
         .download-btn {
           flex: 1; border: none; border-radius: 14px;
+          min-height: var(--tap);
           padding: 14px 18px; font-size: 14px; font-weight: 800;
           cursor: pointer;
           display: inline-flex; align-items: center; justify-content: center;
@@ -354,7 +352,7 @@ const Applications = ({ variant = 'rek' }) => {
         .ios-boutique:hover { background: #f0f4ff !important; opacity: 1; }
 
         /* RESPONSIVE */
-        @media (max-width: 1024px) { .container { padding: 0 28px; } .apps-grid { gap: 22px; } }
+        @media (max-width: 1024px) { .apps-grid { gap: 22px; } }
 
         @media (max-width: 930px) {
           .apps-grid { grid-template-columns: 1fr; max-width: 680px; margin: 0 auto; }
@@ -366,8 +364,6 @@ const Applications = ({ variant = 'rek' }) => {
         }
 
         @media (max-width: 520px) {
-          .apps-section { padding: 70px 0; }
-          .container { padding: 0 16px; }
           .app-card { display: flex; flex-direction: column; padding: 0 0 28px; border-radius: 22px; }
           .app-visual { order: 0; min-height: 340px; max-height: 360px; padding-top: 18px; }
           .app-visual img { width: 290px; max-height: 360px; transform: rotate(-6deg) translate(-22px, -8px); }
@@ -383,7 +379,7 @@ const Applications = ({ variant = 'rek' }) => {
         .apps-rek .bg-glow,
         .apps-rek .section-header-rek { display: none; }
         .apps-rek .container { width: 100%; max-width: none; margin: 0; padding: 0; }
-        .apps-rek .apps-grid { display: block; width: 100%; margin: 0; }
+        .apps-rek .apps-grid { display: block; width: 100%; max-width: none; margin: 0; }
         .apps-rek .app-card-expedition {
           position: relative;
           display: grid;
@@ -391,6 +387,7 @@ const Applications = ({ variant = 'rek' }) => {
           grid-template-rows: 1fr auto;
           width: 100%;
           min-height: min(920px, 100vh);
+          min-height: min(920px, 100svh);
           margin: 0;
           padding: 0;
           overflow: hidden;
@@ -502,6 +499,19 @@ const Applications = ({ variant = 'rek' }) => {
           filter: none;
           transform: none;
           animation: none;
+        }
+
+        /* Tablette (761–1180px) : la colonne texte ne couvre que la moitié de l'écran.
+           Les 3 avantages passent en liste (icône + texte) comme sur mobile, les boutons
+           se rangent en colonne et la carte n'impose plus une hauteur d'écran entière. */
+        @media (min-width: 761px) and (max-width: 1180px) {
+          .apps-rek .app-card-expedition { min-height: 0; }
+          .apps-rek .app-card-expedition .card-inner { padding-top: 56px; }
+          .apps-rek .app-card-expedition .download-buttons { flex-direction: column; align-items: stretch; max-width: 420px; padding-bottom: 56px !important; }
+          .expedition-features { grid-template-columns: 1fr; gap: 16px; }
+          .expedition-feature { display: grid; grid-template-columns: 46px minmax(0, 1fr); column-gap: 12px; row-gap: 3px; align-items: center; }
+          .expedition-feature-icon { grid-row: span 2; width: 42px; height: 42px; margin: 0; }
+          .expedition-feature small { max-width: none; }
         }
 
         @media (max-width: 760px) {
