@@ -2,11 +2,10 @@
 
 import { useState } from 'react';
 import { Package, ShoppingBag, Plane, ArrowRight, ShieldCheck, Timer, Tag, Smartphone } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 
-import deliveryPhone from '../../assets/images/mockeup.png';
-import deliveryPhone2 from '../../assets/images/mockeup2.png';
-import rekHeroImage from '../../assets/images/rek.webp';
+// Visuel du Hero : servi depuis public/ (URL stable) pour être préchargé dans index.html,
+// avant même que le JavaScript ne s'exécute.
+const rekHeroImage = '/images/hero-rek.webp';
 
 const AppStoreIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -28,7 +27,7 @@ const Hero = ({ scrollTo, variant = 'rek' }) => {
       title: "Expédiez vos colis depuis chez vous !",
       buttonText: "En savoir plus",
       buttonLink: "services",
-      image: deliveryPhone2,
+      image: rekHeroImage,
       bgColor: "#ffffff",
       textColor: "#1E3A8A",
       statColor: "#1E3A8A",
@@ -43,7 +42,7 @@ const Hero = ({ scrollTo, variant = 'rek' }) => {
       title: "Achetez vos marques préférées à prix discount !",
       buttonText: "Explorer",
       buttonLink: "app-boutique",
-      image: deliveryPhone,
+      image: rekHeroImage,
       bgColor: "#1E3A8A",
       textColor: "#ffffff",
       statColor: "#ffffff",
@@ -62,11 +61,7 @@ const Hero = ({ scrollTo, variant = 'rek' }) => {
     <section id="hero" className="hero rek-hero">
 
       {/* BACKGROUND */}
-      <motion.div
-        className="hero-bg"
-        animate={{ background: current.bgColor }}
-        transition={{ duration: 0.6 }}
-      />
+      <div className="hero-bg" style={{ background: current.bgColor }} />
       <div className="hero-glow"></div>
 
       {/* CONTENT */}
@@ -86,118 +81,109 @@ const Hero = ({ scrollTo, variant = 'rek' }) => {
           </div>
         </div>
 
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={current.id}
-            className="hero-content"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.55 }}
-          >
-            {/* TEXT */}
-            <div className="hero-text">
-              <div className="hero-badge rek-badge" style={{ background: current.badgeBg }}>
-                <span className="badge-dot"></span>
-                <span style={{ color: current.badgeTextColor }}>
-                  Expédition de colis - Sénégal ↔ France
-                </span>
-              </div>
-
-              <h1 className="hero-title" style={{ color: current.textColor }}>
-                {current.id === 2 ? (
-                  <>
-                    <span className="title-main">Achetez vos marques</span>
-                    <span className="title-brand">préférées</span>
-                    <span className="title-slogan">à prix discount !</span>
-                  </>
-                ) : (
-                  <>
-                    <span className="rek-title-line">Vos colis <span>Sénégal ↔ France</span></span>
-                    <span className="rek-title-line">en toute simplicité !</span>
-                  </>
-                )}
-              </h1>
-
-              {current.id === 1 && (
-                <p className="rek-description">
-                  Yobante Rek vous accompagne dans l'envoi de vos colis entre le Sénégal et la France.
-                  Rapide, sécurisé et à prix compétitif.
-                </p>
-              )}
-
-              {current.id === 1 && (
-                <div className="rek-benefits">
-                  <div className="rek-benefit">
-                    <span className="rek-benefit-icon"><ShieldCheck size={21} strokeWidth={2} /></span>
-                    <span><strong>Sécurité garantie</strong><small>Vos colis entre de bonnes mains</small></span>
-                  </div>
-                  <div className="rek-benefit">
-                    <span className="rek-benefit-icon"><Timer size={21} strokeWidth={2} /></span>
-                    <span><strong>Livraison rapide</strong><small>En France et au Sénégal</small></span>
-                  </div>
-                  <div className="rek-benefit">
-                    <span className="rek-benefit-icon"><Tag size={21} strokeWidth={2} /></span>
-                    <span><strong>Prix compétitifs</strong><small>Des offres adaptées à vos besoins</small></span>
-                  </div>
-                </div>
-              )}
-
-              {current.id === 1 ? (
-                <div className="rek-actions">
-                  <button className="hero-btn rek-primary" onClick={() => scrollTo('apps')}>
-                    <Smartphone size={17} strokeWidth={2} /> Télécharger l'application
-                    <ArrowRight size={16} strokeWidth={2} />
-                  </button>
-                  <button className="hero-btn rek-secondary" onClick={() => scrollTo('services')}>
-                    <Plane size={17} strokeWidth={2} /> Découvrir nos services
-                  </button>
-                </div>
-              ) : (
-                <button className="hero-btn" onClick={() => scrollTo(current.buttonLink)}>
-                  {current.buttonText}
-                  <ArrowRight size={15} strokeWidth={2} style={{ marginLeft: '8px', verticalAlign: 'middle' }} />
-                </button>
-              )}
-
-              {/* STORES */}
-              <div className="store-buttons">
-                <a href="https://apps.apple.com" target="_blank" rel="noreferrer" className={`store-btn ${current.id === 1 ? 'appstore rek-store' : 'appstore-white'}`}>
-                  <AppStoreIcon />
-                  <div className="store-text">
-                    <small>Télécharger sur</small>
-                    <strong>App Store</strong>
-                  </div>
-                </a>
-                <a
-                  href="https://play.google.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`store-btn ${current.id === 1 ? 'play-gold rek-store' : 'play-white'}`}
-                >
-                  <PlayStoreIcon />
-                  <div className="store-text">
-                    <small>Disponible sur</small>
-                    <strong>Google Play</strong>
-                  </div>
-                </a>
-              </div>
-
+        <div key={current.id} className="hero-content">
+          {/* TEXT */}
+          <div className="hero-text">
+            <div className="hero-badge rek-badge" style={{ background: current.badgeBg }}>
+              <span className="badge-dot"></span>
+              <span style={{ color: current.badgeTextColor }}>
+                Expédition de colis - Sénégal ↔ France
+              </span>
             </div>
 
-            {/* IMAGE */}
-            <motion.div className="hero-image rek-visual">
-              <img
-                src={current.id === 1 ? rekHeroImage : current.image}
-                alt={current.id === 1 ? 'Livreur Yobante Rek, colis et application mobile' : 'Application mobile'}
-                width="1460"
-                height="1078"
-                decoding="async"
-                fetchpriority="high"
-              />
-            </motion.div>
-          </motion.div>
-        </AnimatePresence>
+            <h1 className="hero-title" style={{ color: current.textColor }}>
+              {current.id === 2 ? (
+                <>
+                  <span className="title-main">Achetez vos marques</span>
+                  <span className="title-brand">préférées</span>
+                  <span className="title-slogan">à prix discount !</span>
+                </>
+              ) : (
+                <>
+                  <span className="rek-title-line">Vos colis <span>Sénégal ↔ France</span></span>
+                  <span className="rek-title-line">en toute simplicité !</span>
+                </>
+              )}
+            </h1>
+
+            {current.id === 1 && (
+              <p className="rek-description">
+                Yobante Rek vous accompagne dans l'envoi de vos colis entre le Sénégal et la France.
+                Rapide, sécurisé et à prix compétitif.
+              </p>
+            )}
+
+            {current.id === 1 && (
+              <div className="rek-benefits">
+                <div className="rek-benefit">
+                  <span className="rek-benefit-icon"><ShieldCheck size={21} strokeWidth={2} /></span>
+                  <span><strong>Sécurité garantie</strong><small>Vos colis entre de bonnes mains</small></span>
+                </div>
+                <div className="rek-benefit">
+                  <span className="rek-benefit-icon"><Timer size={21} strokeWidth={2} /></span>
+                  <span><strong>Livraison rapide</strong><small>En France et au Sénégal</small></span>
+                </div>
+                <div className="rek-benefit">
+                  <span className="rek-benefit-icon"><Tag size={21} strokeWidth={2} /></span>
+                  <span><strong>Prix compétitifs</strong><small>Des offres adaptées à vos besoins</small></span>
+                </div>
+              </div>
+            )}
+
+            {current.id === 1 ? (
+              <div className="rek-actions">
+                <button className="hero-btn rek-primary" onClick={() => scrollTo('apps')}>
+                  <Smartphone size={17} strokeWidth={2} /> Télécharger l'application
+                  <ArrowRight size={16} strokeWidth={2} />
+                </button>
+                <button className="hero-btn rek-secondary" onClick={() => scrollTo('services')}>
+                  <Plane size={17} strokeWidth={2} /> Découvrir nos services
+                </button>
+              </div>
+            ) : (
+              <button className="hero-btn" onClick={() => scrollTo(current.buttonLink)}>
+                {current.buttonText}
+                <ArrowRight size={15} strokeWidth={2} style={{ marginLeft: '8px', verticalAlign: 'middle' }} />
+              </button>
+            )}
+
+            {/* STORES */}
+            <div className="store-buttons">
+              <a href="https://apps.apple.com" target="_blank" rel="noreferrer" className={`store-btn ${current.id === 1 ? 'appstore rek-store' : 'appstore-white'}`}>
+                <AppStoreIcon />
+                <div className="store-text">
+                  <small>Télécharger sur</small>
+                  <strong>App Store</strong>
+                </div>
+              </a>
+              <a
+                href="https://play.google.com"
+                target="_blank"
+                rel="noreferrer"
+                className={`store-btn ${current.id === 1 ? 'play-gold rek-store' : 'play-white'}`}
+              >
+                <PlayStoreIcon />
+                <div className="store-text">
+                  <small>Disponible sur</small>
+                  <strong>Google Play</strong>
+                </div>
+              </a>
+            </div>
+
+          </div>
+
+          {/* IMAGE */}
+          <div className="hero-image rek-visual">
+            <img
+              src={current.id === 1 ? rekHeroImage : current.image}
+              alt={current.id === 1 ? 'Livreur Yobante Rek, colis et application mobile' : 'Application mobile'}
+              width="1460"
+              height="1078"
+              decoding="async"
+              fetchpriority="high"
+            />
+          </div>
+        </div>
       </div>
 
       {/* DOTS */}
@@ -241,14 +227,8 @@ const Hero = ({ scrollTo, variant = 'rek' }) => {
           border-radius: 50%;
           top: -130px;
           right: -80px;
-          animation: floatGlow 8s ease-in-out infinite;
         }
 
-        @keyframes floatGlow {
-          0% { transform: translate(0,0); }
-          50% { transform: translate(-50px,35px); }
-          100% { transform: translate(0,0); }
-        }
 
         .hero-tabs {
           position: absolute;
@@ -441,12 +421,12 @@ const Hero = ({ scrollTo, variant = 'rek' }) => {
           border-radius: 18px;
           text-align: center;
           box-shadow: 0 8px 24px rgba(30,58,138,0.12);
-          transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+          transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
           border: 1px solid rgba(30,58,138,0.06);
         }
 
         .method-card:hover {
-          transform: translateY(-10px) scale(1.04);
+          transform: translateY(-4px);
           box-shadow: 0 16px 36px rgba(30,58,138,0.18);
           border-color: rgba(30,58,138,0.14);
         }
@@ -472,7 +452,7 @@ const Hero = ({ scrollTo, variant = 'rek' }) => {
           font-weight: 800;
           cursor: pointer;
           margin-bottom: 24px;
-          transition: all 0.28s cubic-bezier(0.34,1.56,0.64,1);
+          transition: all 0.28s cubic-bezier(0.22,1,0.36,1);
           background: #F5C518;
           color: #1E3A8A;
           width: fit-content;
@@ -480,7 +460,7 @@ const Hero = ({ scrollTo, variant = 'rek' }) => {
           letter-spacing: 0.2px;
         }
 
-        .hero-btn:hover { transform: translateY(-4px) scale(1.03); box-shadow: 0 16px 36px rgba(245,197,24,0.45); }
+        .hero-btn:hover { transform: translateY(-2px); box-shadow: 0 16px 36px rgba(245,197,24,0.45); }
 
         .hero-btn.expedition {
           background: #1E3A8A;
@@ -504,11 +484,11 @@ const Hero = ({ scrollTo, variant = 'rek' }) => {
           padding: 12px 18px;
           border-radius: 15px;
           text-decoration: none;
-          transition: all 0.28s cubic-bezier(0.34,1.56,0.64,1);
+          transition: all 0.28s cubic-bezier(0.22,1,0.36,1);
           min-width: 165px;
         }
 
-        .store-btn:hover { transform: translateY(-4px) scale(1.03); }
+        .store-btn:hover { transform: translateY(-2px); }
 
         .store-text {
           display: flex;

@@ -4,18 +4,48 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#1e3a8a" />
-  <meta name="description" content="YOBANTÉ REK - Expédition de colis entre la France et le Sénégal." />
-  
-  <title>YOBANTÉ REK | Expédition France → Sénégal</title>
+  <meta name="description" content="YOBANTÉ REK - Expédiez vos colis entre le Sénégal et la France : simulation du tarif, collecte ou point relais, paiement sécurisé et suivi." />
+
+  <title>YOBANTÉ REK | Expédition de colis Sénégal ↔ France</title>
+
+  <!-- URL canonique : une seule adresse indexée pour la page. -->
+  <link rel="canonical" href="https://yobanterek.com/" />
+
+  <!-- Aperçu lors du partage du lien (Open Graph / réseaux sociaux). -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:site_name" content="YOBANTÉ REK" />
+  <meta property="og:title" content="YOBANTÉ REK | Expédition de colis Sénégal ↔ France" />
+  <meta property="og:description" content="YOBANTÉ REK - Expédiez vos colis entre le Sénégal et la France : simulation du tarif, collecte ou point relais, paiement sécurisé et suivi." />
+  <meta property="og:url" content="https://yobanterek.com/" />
+  <meta property="og:image" content="https://yobanterek.com/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Livreur YOBANTÉ REK, colis et application mobile" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="YOBANTÉ REK | Expédition de colis Sénégal ↔ France" />
+  <meta name="twitter:description" content="YOBANTÉ REK - Expédiez vos colis entre le Sénégal et la France : simulation du tarif, collecte ou point relais, paiement sécurisé et suivi." />
+  <meta name="twitter:image" content="https://yobanterek.com/og-image.jpg" />
 
   <!-- Favicon servi depuis public/ : Vite recopie ce dossier tel quel a la
        racine de dist/, le chemin reste donc valable en production. -->
   <link rel="icon" type="image/png" href="/favicon.png" />
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Visuel du Hero (élément LCP) : demandé dès le HTML, sans attendre le JavaScript.
+       La police Inter n'est volontairement PAS préchargée : WebKit (Safari) la télécharge alors deux fois. -->
+  <link rel="preload" href="/images/hero-rek.webp" as="image" type="image/webp" fetchpriority="high" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "YOBANTÉ REK",
+    "url": "https://yobanterek.com/",
+    "logo": "https://yobanterek.com/favicon.png",
+    "email": "contact@yobanterek.com",
+    "description": "Expédition de colis entre le Sénégal et la France.",
+    "areaServed": ["France", "Sénégal"]
+  }
+  </script>
 </head>
 
 <body>
