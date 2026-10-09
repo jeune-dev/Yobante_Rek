@@ -6,19 +6,19 @@ const MODES = [
     icon: Plane,
     title: 'Fret aérien',
     text: 'La solution pour vos envois urgents et vos colis légers.',
-    points: ['Acheminement rapide', 'Suivi de bout en bout'],
+    points: ['Acheminement rapide'],
   },
   {
     icon: Ship,
     title: 'Fret maritime',
     text: 'Une option économique pour vos colis volumineux et vos gros envois.',
-    points: ['Idéal pour les grands volumes', 'Suivi de bout en bout'],
+    points: ['Idéal pour les grands volumes'],
   },
   {
     icon: Package,
     title: 'Colis GP',
     text: 'Une formule souple pour vos envois du quotidien.',
-    points: ['Pratique pour les petits colis', 'Suivi de bout en bout'],
+    points: ['Pratique pour les petits colis'],
   },
 ];
 

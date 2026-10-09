@@ -1,5 +1,5 @@
 // src/components/sections/HowItWorks.jsx
-import { Calculator, PackageCheck, MapPin, Home } from 'lucide-react';
+import { Calculator, PackageCheck, Home } from 'lucide-react';
 
 const STEPS = [
   {
@@ -13,11 +13,6 @@ const STEPS = [
     text: 'Choisissez la collecte à domicile ou le dépôt en point relais.',
   },
   {
-    icon: MapPin,
-    title: "Suivez l'acheminement",
-    text: "De l'enlèvement à la livraison, restez informé à chaque étape.",
-  },
-  {
     icon: Home,
     title: 'Votre colis est livré',
     text: 'Il est remis à son destinataire, au Sénégal comme en France.',
@@ -29,7 +24,7 @@ const HowItWorks = () => (
     <div className="container">
       <div className="sec-head sr">
         <span className="sec-eyebrow">Comment ça marche</span>
-        <h2 className="sec-title">Envoyer un colis en 4 étapes</h2>
+        <h2 className="sec-title">Envoyer un colis en 3 étapes</h2>
         <p className="sec-sub">
           Un parcours simple et transparent entre le Sénégal et la France, de la simulation à la livraison.
         </p>
@@ -52,7 +47,7 @@ const HowItWorks = () => (
 
       .hiw-grid {
         list-style: none; margin: 0; padding: 0;
-        display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px;
+        display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px;
         position: relative;
       }
       .hiw-card {
@@ -75,8 +70,7 @@ const HowItWorks = () => (
       .hiw-card h3 { margin: 0 0 8px; color: #1E3A8A; font-size: 18px; font-weight: 800; }
       .hiw-card p { margin: 0; color: #64748b; font-size: 14.5px; line-height: 1.65; }
 
-      @media (max-width: 1024px) { .hiw-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-      @media (max-width: 560px) {
+      @media (max-width: 760px) {
         .hiw-grid { grid-template-columns: 1fr; gap: 16px; }
         .hiw-card { padding: 28px 20px 24px; }
       }

@@ -1,6 +1,6 @@
 // src/components/layout/Footer.jsx
 import { Zap, Lock, HeadphonesIcon, Smartphone } from 'lucide-react';
-import yobanteLogo from '../../assets/images/Logo Yobante Rek.webp';
+import yobanteLogo from '../../assets/images/Logo Yobante Rek - pied de page.webp';
 
 const trustItems = [
   { icon: <Zap size={13} />, label: 'Livraison rapide' },
@@ -21,7 +21,7 @@ const Footer = () => {
           {/* BRAND */}
           <div className="footer-brand">
             <div className="footer-logo">
-              <img src={yobanteLogo} alt="Yobanté Logo" className="logo-img" width="260" height="80" loading="lazy" decoding="async" />
+              <img src={yobanteLogo} alt="Yobanté Logo" className="logo-img" width="714" height="219" loading="lazy" decoding="async" />
             </div>
             <p className="footer-description">
               Votre spécialiste de l'expédition de colis et du e-commerce
@@ -78,12 +78,18 @@ const Footer = () => {
         .footer-brand { max-width: 290px; flex: 1 1 220px; }
         .footer-logo  { margin-bottom: 12px; }
 
+        /* Le logo est bleu sur fond transparent : il repose sur une pastille blanche pour rester lisible sur le fond bleu du pied de page. */
+        .footer-logo {
+          display: inline-block;
+          padding: 10px 16px;
+          border-radius: 14px;
+          background: #fff;
+        }
         .footer .logo-img {
           display: block;
-          width: clamp(210px, 56vw, 260px);
-          height: clamp(62px, 17vw, 80px);
-          object-fit: cover;
-          object-position: 50% 50%;
+          width: auto;
+          height: clamp(46px, 13vw, 58px);
+          max-width: 100%;
         }
 
         .footer-description {

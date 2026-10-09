@@ -791,7 +791,7 @@ const Hero = ({ scrollTo, variant = 'rek' }) => {
         .rek-hero .store-btn.rek-store strong { font-size: 13px; }
         .rek-hero .hero-image.rek-visual {
           position: absolute;
-          inset: 0 min(-8.75vw, calc(660px - 50vw)) 0 50%;
+          inset: 0 min(-8.75vw, calc(660px - 50vw)) 0 44%;
           z-index: 1;
           overflow: hidden;
           margin: 0;
@@ -803,7 +803,11 @@ const Hero = ({ scrollTo, variant = 'rek' }) => {
           content: '';
           position: absolute;
           inset: 0 auto 0 0;
-          width: 54%;
+          width: 22%;
+          height: auto;
+          border-radius: 0;
+          filter: none;
+          transform: none;
           z-index: 2;
           background: linear-gradient(90deg, #fff 0%, rgba(255,255,255,.98) 55%, rgba(255,255,255,0) 100%);
         }
@@ -858,7 +862,7 @@ const Hero = ({ scrollTo, variant = 'rek' }) => {
 
         @media (min-width: 981px) and (max-width: 1279px) {
           .rek-hero .hero-text { flex-basis: 50%; }
-          .rek-hero .hero-image.rek-visual { left: 56%; }
+          .rek-hero .hero-image.rek-visual { left: 50%; }
           .rek-hero .hero-image.rek-visual::before { width: 22%; }
           .rek-hero .hero-image.rek-visual img { object-position: 24% center; }
         }

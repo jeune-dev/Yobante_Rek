@@ -14,11 +14,11 @@ const appsData = [
     chipText: "Application mobile",
     chipClass: "expedition",
     title: "YOBANTÉ Expédition",
-    description: "Gérez vos envois entre la France et le Sénégal de manière rapide, sécurisée et transparente. Simulez votre envoi, payez en ligne et suivez chaque étape depuis une seule application.",
+    description: "Gérez vos envois entre la France et le Sénégal de manière rapide, sécurisée et transparente. Simulez votre envoi, payez en ligne depuis une seule application.",
     features: [
       { icon: <Zap size={23} strokeWidth={2.4} />, title: "Simulez votre envoi", description: "Estimez le coût de votre colis en quelques clics." },
       { icon: <ShieldCheck size={23} strokeWidth={2.2} />, title: "Paiement sécurisé", description: "Transactions fiables et 100 % sécurisées." },
-      { icon: <Package size={23} strokeWidth={2.2} />, title: "Suivez votre envoi", description: "De l'enlèvement à la livraison, restez informé." }
+      { icon: <Package size={23} strokeWidth={2.2} />, title: "Collecte ou point relais", description: "Choisissez la remise qui vous convient." }
     ],
     iosUrl: "https://apps.apple.com",
     androidUrl: "https://play.google.com"
@@ -61,7 +61,7 @@ const Applications = ({ variant = 'rek' }) => {
           </h2>
           <p className="section-subtitle">
             {variant === 'rek'
-              ? "Une application mobile pensée pour gérer vos expéditions en quelques gestes, du calcul du tarif au suivi de la livraison."
+              ? "Une application mobile pensée pour gérer vos expéditions en quelques gestes, du calcul du tarif au paiement en ligne."
               : "Une application mobile pensée pour découvrir vos produits, commander simplement et suivre vos achats jusqu'à la livraison."}
           </p>
         </div>
@@ -406,7 +406,7 @@ const Applications = ({ variant = 'rek' }) => {
           inset: 0;
           z-index: 1;
           pointer-events: none;
-          background: linear-gradient(90deg, transparent 47%, rgba(255,255,255,.88) 59%, #fff 70%);
+          background: linear-gradient(90deg, transparent 36%, rgba(255,255,255,.85) 45%, #fff 50%);
         }
         .apps-rek .app-card-expedition .card-glow,
         .apps-rek .app-card-expedition .app-logo-container { display: none; }
@@ -483,7 +483,7 @@ const Applications = ({ variant = 'rek' }) => {
           display: block;
           grid-column: 1;
           grid-row: 1 / -1;
-          width: 62%;
+          width: 50%;
           min-height: 0;
           padding: 0;
           overflow: hidden;
