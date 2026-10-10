@@ -53,9 +53,16 @@ function App() {
     return () => observer.disconnect();
   }, []);
 
-  // Le contenu est rendu par React après le chargement : à l'ouverture directe d'une adresse
-  // comme /#contact, le navigateur cherche l'ancre avant qu'elle n'existe et ne défile pas.
+  // Actualisation : on repart toujours du haut de la page.
+  // Ouverture directe d'une ancre (/#contact) : on défile jusqu'à la section une fois rendue.
   useEffect(() => {
+    if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual';
+    const nav = performance.getEntriesByType?.('navigation')?.[0];
+    if (nav?.type === 'reload') {
+      if (window.location.hash) window.history.replaceState(null, '', window.location.pathname + window.location.search);
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      return;
+    }
     const id = decodeURIComponent(window.location.hash.slice(1));
     const target = id ? document.getElementById(id) : null;
     if (target) requestAnimationFrame(() => target.scrollIntoView());
