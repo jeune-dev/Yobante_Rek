@@ -1,4 +1,3 @@
-// src/components/layout/Footer.jsx
 import { Zap, Lock, HeadphonesIcon, Smartphone } from 'lucide-react';
 import yobanteLogo from '../../assets/images/Logo Yobante Rek - pied de page.webp';
 
@@ -12,8 +11,6 @@ const trustItems = [
 const Footer = () => {
   return (
     <footer className="footer">
-      <div className="footer-bg-glow glow-1"></div>
-      <div className="footer-bg-glow glow-2"></div>
 
       <div className="container">
         <div className="footer-main">
@@ -52,21 +49,13 @@ const Footer = () => {
         </div>
       </div>
 
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .footer {
           position: relative; overflow: hidden;
           background: #053d8f;
           color: white; padding-top: 38px;
           padding-bottom: env(safe-area-inset-bottom, 0px);
         }
-
-        .footer-bg-glow {
-          position: absolute; border-radius: 50%;
-          filter: blur(120px); opacity: 0.12; z-index: 0;
-        }
-
-        .footer .glow-1 { width: 280px; height: 280px; background: #1E3A8A; top: -90px; right: -90px; }
-        .footer .glow-2 { width: 230px; height: 230px; background: #F5C518; bottom: -70px; left: -70px; }
 
         .footer-main {
           display: flex; flex-wrap: wrap;
@@ -115,7 +104,6 @@ const Footer = () => {
           border: 1px solid rgba(255,255,255,.09);
           color: rgba(255,255,255,.82);
           font-size: 11.5px; font-weight: 700;
-          backdrop-filter: blur(8px);
           margin-left: 0;
           white-space: normal;
         }
@@ -152,7 +140,7 @@ const Footer = () => {
         @media (max-width: 480px) {
           .footer-links { gap: 0 16px; }
         }
-      `}</style>
+      ` }} />
     </footer>
   );
 };

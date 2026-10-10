@@ -3,47 +3,138 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#1e3a8a" />
+  <meta name="theme-color" content="#1E3A8A" />
   <meta name="description" content="YOBANTÉ REK - Expédiez vos colis entre le Sénégal et la France : simulation du tarif, collecte ou point relais, paiement sécurisé." />
+
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <meta name="author" content="YOBANTÉ" />
+  <meta name="format-detection" content="telephone=no" />
 
   <title>YOBANTÉ REK | Expédition de colis Sénégal ↔ France</title>
 
-  <!-- URL canonique : une seule adresse indexée pour la page. -->
-  <link rel="canonical" href="https://yobanterek.com/" />
+  <link rel="canonical" href="https://www.yobanterek.com/" />
+  <link rel="alternate" hreflang="fr" href="https://www.yobanterek.com/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.yobanterek.com/" />
 
-  <!-- Aperçu lors du partage du lien (Open Graph / réseaux sociaux). -->
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="fr_FR" />
   <meta property="og:site_name" content="YOBANTÉ REK" />
   <meta property="og:title" content="YOBANTÉ REK | Expédition de colis Sénégal ↔ France" />
   <meta property="og:description" content="YOBANTÉ REK - Expédiez vos colis entre le Sénégal et la France : simulation du tarif, collecte ou point relais, paiement sécurisé." />
-  <meta property="og:url" content="https://yobanterek.com/" />
-  <meta property="og:image" content="https://yobanterek.com/og-image.jpg" />
+  <meta property="og:url" content="https://www.yobanterek.com/" />
+  <meta property="og:image" content="https://www.yobanterek.com/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Livreur YOBANTÉ REK, colis et application mobile" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:alt" content="Application mobile YOBANTÉ REK pour l’envoi de colis entre la France et le Sénégal" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="YOBANTÉ REK | Expédition de colis Sénégal ↔ France" />
   <meta name="twitter:description" content="YOBANTÉ REK - Expédiez vos colis entre le Sénégal et la France : simulation du tarif, collecte ou point relais, paiement sécurisé." />
-  <meta name="twitter:image" content="https://yobanterek.com/og-image.jpg" />
+  <meta name="twitter:image" content="https://www.yobanterek.com/og-image.jpg" />
+  <meta name="twitter:image:alt" content="Application mobile YOBANTÉ REK pour l’envoi de colis entre la France et le Sénégal" />
 
-  <!-- Favicon servi depuis public/ : Vite recopie ce dossier tel quel a la
-       racine de dist/, le chemin reste donc valable en production. -->
-  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-  <!-- Visuel du Hero (élément LCP) : demandé dès le HTML, sans attendre le JavaScript.
-       La police Inter n'est volontairement PAS préchargée : WebKit (Safari) la télécharge alors deux fois. -->
   <link rel="preload" href="/images/hero-rek.webp" as="image" type="image/webp" fetchpriority="high" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": "https://www.yobanterek.com/#organization",
     "name": "YOBANTÉ REK",
-    "url": "https://yobanterek.com/",
-    "logo": "https://yobanterek.com/favicon.png",
+    "url": "https://www.yobanterek.com/",
+    "logo": "https://www.yobanterek.com/favicon.png",
+    "image": "https://www.yobanterek.com/og-image.jpg",
     "email": "contact@yobanterek.com",
     "description": "Expédition de colis entre le Sénégal et la France.",
-    "areaServed": ["France", "Sénégal"]
+    "areaServed": [
+      {
+        "@type": "Country",
+        "name": "France"
+      },
+      {
+        "@type": "Country",
+        "name": "Sénégal"
+      }
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "email": "contact@yobanterek.com",
+      "availableLanguage": [
+        "French"
+      ]
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://www.yobanterek.com/#website",
+    "name": "YOBANTÉ REK",
+    "url": "https://www.yobanterek.com/",
+    "inLanguage": "fr-FR",
+    "publisher": {
+      "@id": "https://www.yobanterek.com/#organization"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Expédition de colis Sénégal ↔ France",
+    "serviceType": "Expédition de colis",
+    "provider": {
+      "@id": "https://www.yobanterek.com/#organization"
+    },
+    "areaServed": [
+      {
+        "@type": "Country",
+        "name": "France"
+      },
+      {
+        "@type": "Country",
+        "name": "Sénégal"
+      }
+    ],
+    "description": "Envoi de colis entre la France et le Sénégal, dans les deux sens, avec collecte à domicile ou dépôt en point relais : fret aérien, fret maritime et colis GP."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Quels objets puis-je envoyer ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Vous pouvez envoyer tout objet autorisé par la législation en vigueur au Sénégal et en France, sous réserve des conditions de transport et de douane. Les objets interdits, dangereux, inflammables, illicites ou soumis à restriction ne sont pas acceptés. Pour vérifier un cas particulier, contactez-nous ou écrivez-nous via nos réseaux sociaux."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Comment obtenir un devis ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Téléchargez l'application Yobanté Rêk puis renseignez les informations de votre colis. Selon la catégorie, un devis vous sera transmis rapidement."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quels sont les moyens de paiement acceptés ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nous acceptons Orange Money, Wave et la carte bancaire. Les options disponibles sont affichées lors de la validation."
+        }
+      }
+    ]
   }
   </script>
 </head>

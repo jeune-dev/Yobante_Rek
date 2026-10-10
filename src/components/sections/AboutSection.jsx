@@ -1,14 +1,24 @@
-// src/components/sections/AboutSection.jsx
 
-const AboutSection = ({ variant = 'rek' }) => {
-  const isBoutique = variant === 'boutique';
+const FlagSN = () => (
+  <svg className="about-flag" viewBox="0 0 3 2" aria-hidden="true">
+    <rect width="1" height="2" fill="#00853F" />
+    <rect x="1" width="1" height="2" fill="#FDEF42" />
+    <rect x="2" width="1" height="2" fill="#E31B23" />
+    <path d="M1.5 0.62l0.11 0.34h0.36l-0.29 0.21 0.11 0.34-0.29-0.21-0.29 0.21 0.11-0.34-0.29-0.21h0.36z" fill="#00853F" />
+  </svg>
+);
+
+const FlagFR = () => (
+  <svg className="about-flag" viewBox="0 0 3 2" aria-hidden="true">
+    <rect width="1" height="2" fill="#002395" />
+    <rect x="1" width="1" height="2" fill="#fff" />
+    <rect x="2" width="1" height="2" fill="#ED2939" />
+  </svg>
+);
+
+const AboutSection = () => {
   return (
     <section id="about" className="about-section">
-      <div className="about-bg-glow glow-1"></div>
-      <div className="about-bg-glow glow-2"></div>
-
-      {/* Décoration grande quote */}
-      <div className="about-quote-deco" aria-hidden="true">"</div>
 
       <div className="container">
         <div className="about-inner">
@@ -24,48 +34,25 @@ const AboutSection = ({ variant = 'rek' }) => {
             <div className="about-divider"></div>
 
             <p className="about-description">
-              {isBoutique
-                ? "YOBANTÉ Boutique facilite vos achats en France et leur livraison au Sénégal grâce à une sélection de produits fiables, accessibles et authentiques."
-                : "YOBANTÉ REK facilite l'envoi de colis entre le Sénégal et la France grâce à un service fiable, accessible et transparent."}
+              YOBANTÉ REK facilite l'envoi de colis entre le Sénégal et la France grâce à un service fiable, accessible et transparent.
             </p>
 
             <div className="about-badges">
-              <span className="about-badge">🇸🇳 Sénégal</span>
-              <span className="about-badge-arrow">↔</span>
-              <span className="about-badge">🇫🇷 France</span>
+              <span className="about-badge"><FlagSN />Sénégal</span>
+              <span className="about-badge-arrow" aria-hidden="true">↔</span>
+              <span className="about-badge"><FlagFR />France</span>
             </div>
           </div>
 
         </div>
       </div>
 
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .about-section {
           position: relative; overflow: hidden;
           padding: var(--section-y) 0;
-          background: linear-gradient(135deg, #0a1535 0%, #1E3A8A 60%, #152E70 100%);
+          background: #1E3A8A;
           color: white;
-        }
-
-        .about-bg-glow {
-          position: absolute; border-radius: 50%;
-          filter: blur(130px); opacity: 0.18; pointer-events: none;
-        }
-
-        .about-section .glow-1 { width: 420px; height: 420px; background: #2a52c9; top: -120px; right: -100px; }
-        .about-section .glow-2 { width: 350px; height: 350px; background: #F5C518; bottom: -100px; left: -80px; }
-
-        /* Déco grande guillemet */
-        .about-quote-deco {
-          position: absolute;
-          font-size: 380px;
-          font-weight: 900;
-          color: rgba(255,255,255,0.03);
-          line-height: 1;
-          top: -60px; right: 5%;
-          pointer-events: none;
-          font-family: Georgia, serif;
-          user-select: none;
         }
 
 
@@ -107,7 +94,7 @@ const AboutSection = ({ variant = 'rek' }) => {
         /* Diviseur doré */
         .about-divider {
           width: 64px; height: 4px;
-          background: linear-gradient(90deg, #F5C518, rgba(245,197,24,0.3));
+          background: #F5C518;
           border-radius: 4px;
           margin-bottom: 28px;
         }
@@ -131,16 +118,17 @@ const AboutSection = ({ variant = 'rek' }) => {
           border-radius: 999px;
           padding: 10px 20px;
           font-size: 15px; font-weight: 700;
-          backdrop-filter: blur(10px);
           letter-spacing: 0.2px;
         }
+
+        .about-badge { display: inline-flex; align-items: center; gap: 10px; }
+        .about-flag { width: 22px; height: 15px; border-radius: 3px; box-shadow: 0 0 0 1px rgba(255,255,255,0.25); }
 
         .about-badge-arrow {
           font-size: 20px; color: #F5C518; font-weight: 800;
         }
 
         @media (max-width: 768px) {
-          .about-quote-deco { font-size: 240px; right: -20px; }
           .about-description { font-size: 15px; }
         }
 
@@ -150,7 +138,7 @@ const AboutSection = ({ variant = 'rek' }) => {
           .about-badges { gap: 10px; }
           .about-badge { font-size: 13px; padding: 8px 14px; }
         }
-      `}</style>
+      ` }} />
     </section>
   );
 };

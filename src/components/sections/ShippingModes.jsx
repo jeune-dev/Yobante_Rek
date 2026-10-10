@@ -1,4 +1,3 @@
-// src/components/sections/ShippingModes.jsx
 import { Plane, Ship, Package, ArrowRight } from 'lucide-react';
 
 const MODES = [
@@ -53,8 +52,8 @@ const ShippingModes = () => (
       </div>
     </div>
 
-    <style>{`
-      .sm-section { padding: var(--section-y) 0; background: linear-gradient(180deg, #f8fbff, #eef4ff); }
+    <style dangerouslySetInnerHTML={{ __html: `
+      .sm-section { padding: var(--section-y) 0; background: #f8fbff; }
 
       .sm-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
       .sm-card {
@@ -87,9 +86,10 @@ const ShippingModes = () => (
       }
       .sm-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 34px rgba(245,197,24,.5); }
 
-      @media (max-width: 900px) { .sm-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; } }
+      @media (max-width: 900px) { .sm-grid { gap: 14px; } }
+      @media (max-width: 680px) { .sm-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; } }
       @media (max-width: 480px) { .sm-btn { width: 100%; } }
-    `}</style>
+    ` }} />
   </section>
 );
 

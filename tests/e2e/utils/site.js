@@ -4,7 +4,7 @@ export const site = {
   name: 'YOBANTÉ REK',
   title: 'YOBANTÉ REK | Expédition de colis Sénégal ↔ France',
   h1: /Vos colis/,
-  domain: 'https://yobanterek.com',
+  domain: 'https://www.yobanterek.com',
   source: 'rek',
   subject: 'Autres',
   // Visuel du Hero préchargé dans index.html (élément LCP) ; null si aucun.

@@ -1,14 +1,6 @@
-// src/components/sections/Services.jsx
 import { useCallback } from "react";
 import rekLogo from "../../assets/images/Logo Yobante Rek.webp";
-import boutiqueLogo from "../../assets/images/Logo Yobante Boutique.webp";
-import {
-  Mail, Package, Truck, ShoppingBag, ArrowRight,
-  Tag, MapPin, Coffee, Shirt, UtensilsCrossed, Home,
-  Apple, Fish, Egg, Snowflake, Baby, Cookie, FlaskConical,
-  GlassWater, Wheat, SprayCan, Droplets, PawPrint,
-  Gamepad2, Smartphone, Laptop, Tv, Dumbbell,
-} from "lucide-react";
+import { Mail, Package, Truck, ArrowRight } from "lucide-react";
 
 const STEPS = [
   {
@@ -64,59 +56,11 @@ const PRICING_PLANS = [
   }
 ];
 
-const BOUTIQUE_STEPS = [
-  {
-    num: "01",
-    title: "Parcourez nos rayons et sélectionnez vos produits",
-    desc: ""
-  },
-  {
-    num: "02",
-    title: "Validez votre panier",
-    desc: "Règlement possible par Orange Money, Wave ou carte bancaire."
-  },
-  {
-    num: "03",
-    title: "Programmez vos livraisons",
-    desc: "Recevez directement votre commande à l'adresse de votre choix."
-  }
-];
-
-const CATEGORIES = [
-  { icon: <Tag size={26} strokeWidth={1.5} color="white" />,            label: "Promotions" },
-  { icon: <MapPin size={26} strokeWidth={1.5} color="white" />,         label: "Produits Locaux" },
-  { icon: <Coffee size={26} strokeWidth={1.5} color="white" />,         label: "Cafés" },
-  { icon: <Shirt size={26} strokeWidth={1.5} color="white" />,          label: "Mode Locale" },
-  { icon: <UtensilsCrossed size={26} strokeWidth={1.5} color="white" />, label: "Traiteur" },
-  { icon: <Home size={26} strokeWidth={1.5} color="white" />,           label: "Mobilier & Déco" },
-  { icon: <Apple size={26} strokeWidth={1.5} color="white" />,          label: "Fruits & Légumes" },
-  { icon: <Fish size={26} strokeWidth={1.5} color="white" />,           label: "Viande & Poissons" },
-  { icon: <Egg size={26} strokeWidth={1.5} color="white" />,            label: "Crèmerie & Laitiers" },
-  { icon: <UtensilsCrossed size={26} strokeWidth={1.5} color="white" />, label: "Charcuterie" },
-  { icon: <Snowflake size={26} strokeWidth={1.5} color="white" />,      label: "Surgelés" },
-  { icon: <Baby size={26} strokeWidth={1.5} color="white" />,           label: "Bébé" },
-  { icon: <Cookie size={26} strokeWidth={1.5} color="white" />,         label: "Épicerie Sucrée" },
-  { icon: <FlaskConical size={26} strokeWidth={1.5} color="white" />,   label: "Épicerie Salée" },
-  { icon: <GlassWater size={26} strokeWidth={1.5} color="white" />,     label: "Boissons" },
-  { icon: <Wheat size={26} strokeWidth={1.5} color="white" />,          label: "Pains & Pâtisserie" },
-  { icon: <SprayCan size={26} strokeWidth={1.5} color="white" />,       label: "Entretien & Nettoyage" },
-  { icon: <Droplets size={26} strokeWidth={1.5} color="white" />,       label: "Hygiène & Beauté" },
-  { icon: <PawPrint size={26} strokeWidth={1.5} color="white" />,       label: "Animalerie" },
-  { icon: <Gamepad2 size={26} strokeWidth={1.5} color="white" />,       label: "Jeux Vidéo" },
-  { icon: <Smartphone size={26} strokeWidth={1.5} color="white" />,     label: "Smartphones & Connectés" },
-  { icon: <Laptop size={26} strokeWidth={1.5} color="white" />,         label: "Informatique & Bureau" },
-  { icon: <Tv size={26} strokeWidth={1.5} color="white" />,             label: "Image & Son" },
-  { icon: <Dumbbell size={26} strokeWidth={1.5} color="white" />,       label: "Sport" },
-  { icon: <ShoppingBag size={26} strokeWidth={1.5} color="white" />,    label: "Mode & Textile" },
-];
-
-const Services = ({ scrollTo, variant = 'rek' }) => {
+const Services = ({ scrollTo }) => {
   const handleClick = useCallback(() => { scrollTo("contact"); }, [scrollTo]);
 
   return (
-    <section id="services" className={`section ${variant}`}>
-      <div className="bg-shape bg1"></div>
-      <div className="bg-shape bg2"></div>
+    <section id="services" className="section">
 
       <div className="container">
 
@@ -206,95 +150,18 @@ const Services = ({ scrollTo, variant = 'rek' }) => {
           </div>
         </div>
 
-        {/* ===== BOUTIQUE ===== */}
-        <div id="app-boutique" className="service-card-wrapper boutique-wrapper glass-card sr boutique-service" style={{ marginTop: "60px" }}>
-
-          {/* LEFT promo boutique */}
-          <div className="card-right promo-side">
-            <div className="promo-box boutique-gradient">
-              <img src={boutiqueLogo} alt="Yobanté Boutique" className="promo-logo" width="150" height="150" loading="lazy" decoding="async" />
-              <p className="promo-desc boutique-desc">
-                Achetez vos produits préférés à prix discount
-              </p>
-              <button className="promo-btn boutique-btn" onClick={() => scrollTo("app-boutique")}>
-                Explorer nos rayons
-              </button>
-            </div>
-          </div>
-
-          <div className="card-left blue-dark-bg">
-            <div className="card-title-row">
-              <div className="card-icon-circle gold-bg">
-                <ShoppingBag size={28} strokeWidth={1.5} color="#1E3A8A" />
-              </div>
-              <div>
-                <h3 className="card-main-title white-text">Yobanté Boutique</h3>
-              </div>
-            </div>
-
-            {/* Nos rayons */}
-            <div className="inner-section">
-              <div className="inner-tag white-text">
-                <span className="inner-tag-line gold-bg"></span>
-                NOS RAYONS
-              </div>
-              <div className="categories-grid">
-                {CATEGORIES.map((cat, i) => (
-                  <div key={i} className="category-pill">
-                    <span className="cat-icon">{cat.icon}</span>
-                    <span className="cat-label">{cat.label}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Parcours client */}
-            <div className="inner-section">
-              <div className="inner-tag white-text">
-                <span className="inner-tag-line gold-bg"></span>
-                PARCOURS CLIENT
-              </div>
-              <div className="steps-row">
-                {BOUTIQUE_STEPS.map((step, i) => (
-                  <div key={i} className="step-wrapper">
-                    <div className="step-card boutique-step-card">
-                      <div className="step-num gold-bg step-num-dark">Étape {i + 1}</div>
-                      <p className="step-title boutique-step-title">{step.title}</p>
-                      {step.desc && <p className="step-desc boutique-step-desc">{step.desc}</p>}
-                    </div>
-                    {i < BOUTIQUE_STEPS.length - 1 && <div className="step-arrow"><ArrowRight size={22} strokeWidth={2.5} className="gold-text" /></div>}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
 
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         * { box-sizing: border-box; }
 
         .section {
           position: relative;
           padding: var(--section-y) 0;
           background:
-            radial-gradient(circle at top left, #FDF3CC 0%, transparent 28%),
-            radial-gradient(circle at bottom right, #C5D5F0 0%, transparent 32%),
             #f8fafc;
           overflow: hidden;
         }
-
-        .bg-shape {
-          position: absolute;
-          border-radius: 50%;
-          filter: blur(120px);
-          opacity: 0.25;
-          z-index: 0;
-        }
-
-        .bg1 { width: 320px; height: 320px; background: #1E3A8A; top: -90px; right: -90px; }
-        .bg2 { width: 280px; height: 280px; background: #F5C518; bottom: -90px; left: -90px; }
 
         /* HEADER */
         .section .section-header { text-align: center; margin-bottom: clamp(36px, 5vw, 56px); }
@@ -327,15 +194,11 @@ const Services = ({ scrollTo, variant = 'rek' }) => {
 
         .glass-card {
           background: rgba(255,255,255,0.72);
-          backdrop-filter: blur(24px);
           border: 1px solid rgba(255,255,255,0.45);
           box-shadow: 0 20px 60px rgba(30,58,138,0.1), 0 2px 0 rgba(255,255,255,0.8) inset;
         }
 
-        .boutique-wrapper { grid-template-columns: 1fr 2fr; }
 
-        .boutique .expedition-service,
-        .rek .boutique-service { display: none; }
 
         .card-left {
           padding: 38px;
@@ -345,7 +208,7 @@ const Services = ({ scrollTo, variant = 'rek' }) => {
         }
 
         .yellow-main { background: #F5C518; }
-        .blue-dark-bg { background: linear-gradient(135deg, #1E3A8A 0%, #152E70 100%); }
+        .blue-dark-bg { background: #1E3A8A; }
 
         /* COLORS */
         .blue-text   { color: #1E3A8A; }
@@ -419,17 +282,6 @@ const Services = ({ scrollTo, variant = 'rek' }) => {
           box-shadow: 0 16px 36px rgba(30,58,138,0.14);
         }
 
-        .boutique-step-card {
-          background: rgba(255,255,255,0.1);
-          border: 1px solid rgba(255,255,255,0.18);
-          backdrop-filter: blur(10px);
-          transition: all 0.28s cubic-bezier(0.22,1,0.36,1);
-        }
-        .boutique-step-card:hover {
-          transform: translateY(-6px);
-          background: rgba(255,255,255,0.15);
-          box-shadow: 0 14px 32px rgba(0,0,0,0.15);
-        }
 
         .step-num {
           height: 30px;
@@ -456,8 +308,6 @@ const Services = ({ scrollTo, variant = 'rek' }) => {
 
         .step-desc { font-size: 13px; line-height: 1.6; }
 
-        .boutique-step-title { color: #ffffff !important; font-weight: 800; }
-        .boutique-step-desc { color: rgba(255,255,255,0.85) !important; }
 
         .step-arrow {
           font-size: 32px; font-weight: 800;
@@ -484,7 +334,7 @@ const Services = ({ scrollTo, variant = 'rek' }) => {
         }
 
         .popular-card {
-          background: linear-gradient(135deg, #ffffff 0%, #FDF3CC 100%);
+          background: #FFFBEB;
           border: 2px solid #1E3A8A;
         }
 
@@ -492,7 +342,7 @@ const Services = ({ scrollTo, variant = 'rek' }) => {
           position: absolute;
           top: -1px; left: 50%;
           transform: translateX(-50%);
-          background: linear-gradient(90deg, #1E3A8A, #2a52c9);
+          background: #1E3A8A;
           color: white;
           padding: 4px 28px;
           border-radius: 0 0 14px 14px;
@@ -532,7 +382,7 @@ const Services = ({ scrollTo, variant = 'rek' }) => {
           width: 100%; border: none;
           min-height: var(--tap);
           padding: 11px; border-radius: 50px;
-          background: linear-gradient(135deg, #1E3A8A, #2a52c9);
+          background: #1E3A8A;
           color: white;
           font-size: 12px; font-weight: 800; cursor: pointer;
           flex-shrink: 0;
@@ -541,40 +391,10 @@ const Services = ({ scrollTo, variant = 'rek' }) => {
           letter-spacing: 0.3px;
         }
         .plan-btn:hover {
-          background: linear-gradient(135deg, #152E70, #1E3A8A);
+          background: #152E70;
           transform: translateY(-2px);
           box-shadow: 0 8px 20px rgba(30,58,138,0.35);
         }
-
-        /* CATEGORIES */
-        .categories-grid {
-          display: grid;
-          grid-template-columns: repeat(3,1fr);
-          gap: 12px;
-        }
-
-        .category-pill {
-          background: rgba(255,255,255,0.1);
-          border: 1px solid rgba(255,255,255,0.16);
-          border-radius: 18px;
-          padding: 14px 10px;
-          text-align: center;
-          backdrop-filter: blur(12px);
-          transition: all 0.25s ease;
-          cursor: default;
-        }
-        .category-pill:hover {
-          background: rgba(255,255,255,0.18);
-          border-color: rgba(245,197,24,0.4);
-          transform: translateY(-4px);
-        }
-
-        .cat-icon {
-          display: flex; align-items: center; justify-content: center;
-          margin-bottom: 8px; height: 28px;
-        }
-
-        .cat-label { display: block; font-size: 12px; font-weight: 700; color: white; }
 
         /* PROMO */
         .promo-side {
@@ -598,7 +418,6 @@ const Services = ({ scrollTo, variant = 'rek' }) => {
         }
 
         .expedition-gradient { background: #F5C518; }
-        .boutique-gradient   { background: linear-gradient(135deg, #1E3A8A 0%, #152E70 100%); }
 
         .promo-logo {
           width: 150px;
@@ -615,7 +434,6 @@ const Services = ({ scrollTo, variant = 'rek' }) => {
         }
 
         .expedition-desc { color: #1E3A8A !important; }
-        .boutique-desc { color: white !important; }
 
         .promo-btn {
           width: 100%; max-width: 260px;
@@ -635,56 +453,47 @@ const Services = ({ scrollTo, variant = 'rek' }) => {
         }
         .expedition-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(30,58,138,0.45); }
 
-        .boutique-btn {
-          background: #F5C518; color: #1E3A8A;
-          box-shadow: 0 8px 24px rgba(245,197,24,0.35);
-        }
-        .boutique-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(245,197,24,0.45); }
 
         /* RESPONSIVE */
         @media (max-width: 1024px) {
-          .service-card-wrapper,
-          .boutique-wrapper { grid-template-columns: 1fr; }
-          .promo-side { min-height: 280px; }
-
-          /* Expédition : promo passe en premier sur mobile */
-          .service-card-wrapper:not(.boutique-wrapper) .card-left { order: 2; }
-          .service-card-wrapper:not(.boutique-wrapper) .promo-side { order: 1; }
+          .service-card-wrapper { grid-template-columns: 1fr; }
+          .service-card-wrapper .card-left { order: 2; }
+          .service-card-wrapper .promo-side { order: 1; }
+          .promo-box { max-width: 560px; }
         }
 
         @media (max-width: 768px) {
-          .promo-box { max-width: 100%; }
           .card-left { padding: 26px 20px; }
           .service-card-wrapper { border-radius: 22px; }
           .promo-side { padding: 16px; }
-          .card-title-row { align-items: flex-start; }
-
-          .steps-row { flex-direction: column; align-items: center; }
-          .step-wrapper { width: 100%; flex-direction: column; }
-          .step-card { width: 100%; max-width: 420px; height: auto; min-height: unset; }
-          .step-arrow { transform: rotate(90deg); margin: 8px 0; }
-
-          .pricing-row { grid-template-columns: 1fr; }
-          .pricing-card { max-width: 380px; margin: 0 auto; width: 100%; }
-
-          .categories-grid { grid-template-columns: repeat(2,1fr); }
+          .card-title-row { align-items: center; }
+          .step-card { min-height: 0; padding: 22px 12px; }
           .promo-desc { font-size: 17px; }
-          .promo-side { min-height: 250px; }
+        }
+
+        @media (max-width: 640px) {
+          .steps-row { flex-direction: column; align-items: stretch; gap: 0; }
+          .step-wrapper { flex-direction: column; width: 100%; }
+          .step-card { width: 100%; height: auto; padding: 20px 16px; }
+          .step-title { min-height: 0; }
+          .step-arrow { margin: 6px 0; transform: rotate(90deg); }
+
+          .pricing-row { grid-template-columns: 1fr; gap: 14px; }
+          .pricing-card { width: 100%; padding: 26px 16px 18px; }
+
+          .promo-box { max-width: 100%; padding: 26px 20px; gap: 16px; }
+          .promo-logo { width: 96px; border-radius: 16px; }
+          .promo-desc { font-size: 16px; line-height: 1.45; }
         }
 
         @media (max-width: 480px) {
-          .categories-grid { grid-template-columns: repeat(2, 1fr); }
-          .card-main-title { font-size: 24px; }
-          .card-left { padding: 22px 16px; gap: 22px; }
-          .promo-box { padding: 32px 22px; gap: 20px; }
+          .card-main-title { font-size: 22px; }
+          .card-left { padding: 22px 14px; gap: 22px; }
           .promo-desc { font-size: 15px; }
-          .promo-btn { max-width: 260px; font-size: 14px; padding: 12px 18px; }
-          .card-icon-circle { width: 52px; height: 52px; border-radius: 16px; }
-          .pricing-card { max-width: 100%; }
-          .category-pill { min-width: 0; padding: 12px 6px; }
-          .cat-label { font-size: 11px; line-height: 1.25; overflow-wrap: break-word; hyphens: auto; }
+          .promo-btn { max-width: 100%; font-size: 14px; padding: 12px 18px; }
+          .card-icon-circle { width: 48px; height: 48px; border-radius: 14px; }
         }
-      `}</style>
+      ` }} />
     </section>
   );
 };

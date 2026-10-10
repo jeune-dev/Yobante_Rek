@@ -1,4 +1,3 @@
-// src/components/sections/HowItWorks.jsx
 import { Calculator, PackageCheck, Home } from 'lucide-react';
 
 const STEPS = [
@@ -42,7 +41,7 @@ const HowItWorks = () => (
       </ol>
     </div>
 
-    <style>{`
+    <style dangerouslySetInnerHTML={{ __html: `
       .hiw-section { padding: var(--section-y) 0; background: #fff; }
 
       .hiw-grid {
@@ -64,7 +63,7 @@ const HowItWorks = () => (
       .hiw-icon {
         display: grid; place-items: center; width: 58px; height: 58px; margin-bottom: 18px;
         border-radius: 18px; color: #fff;
-        background: linear-gradient(135deg, #1E3A8A, #152E70);
+        background: #1E3A8A;
         box-shadow: 0 10px 22px rgba(30,58,138,.22);
       }
       .hiw-card h3 { margin: 0 0 8px; color: #1E3A8A; font-size: 18px; font-weight: 800; }
@@ -74,7 +73,7 @@ const HowItWorks = () => (
         .hiw-grid { grid-template-columns: 1fr; gap: 16px; }
         .hiw-card { padding: 28px 20px 24px; }
       }
-    `}</style>
+    ` }} />
   </section>
 );
 

@@ -1,7 +1,4 @@
-/* src/styles/global.css */
-/* ─── POLICE : Inter (variable, 400–800), auto-hébergée ─────────────
-   Servie depuis /fonts : aucune requête vers un tiers, aucun CSS de police
-   bloquant le rendu, et les fichiers sont préchargés dans index.html. */
+/* Inter variable (400–800), auto-hébergée */
 @font-face {
   font-family: 'Inter';
   font-style: normal;
@@ -60,7 +57,7 @@
   /* Gouttière latérale : 16px sur petit mobile, jusqu'à 32px sur grand écran. */
   --gutter: clamp(16px, 4vw, 32px);
   /* Hauteur de la barre de navigation (réduite sous 900px). */
-  --nav-h: 90px;
+  --nav-h: 72px;
   /* Espacement vertical des sections : 64px → 100px. */
   --section-y: clamp(64px, 9vw, 100px);
   /* Taille minimale d'une cible tactile (WCAG 2.5.5 / Apple HIG). */
@@ -90,6 +87,7 @@
 }
 
 html {
+  scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
@@ -219,7 +217,7 @@ main:focus { outline: none; }
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #f1f5f9; }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #1E3A8A, #2a52c9);
+  background: #1E3A8A;
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover { background: #152E70; }
@@ -358,25 +356,6 @@ main:focus { outline: none; }
   animation: motion-ring 2.8s ease-out 1.5s infinite;
 }
 
-/* Barre de progression de lecture, pilotée par le défilement (Chrome, Edge, Safari récent ;
-   ignorée ailleurs). */
-@supports (animation-timeline: scroll()) {
-  @keyframes motion-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    z-index: 1100;
-    background: linear-gradient(90deg, #FBBF24, #1E3A8A);
-    transform-origin: 0 50%;
-    transform: scaleX(0);
-    pointer-events: none;
-    animation: motion-progress linear both;
-    animation-timeline: scroll(root block);
-  }
-}
-
 /* ─── MOUVEMENT RÉDUIT ────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto !important; }
@@ -388,9 +367,6 @@ main:focus { outline: none; }
     scroll-behavior: auto !important;
   }
   .sr, .sr-l, .sr-r { opacity: 1; transform: none; }
-  /* Le bandeau défilant n'a aucun intérêt à défiler pour ces utilisateurs :
-     il devient une rangée que l'on peut faire défiler au doigt. */
-  .trust-track { animation: none !important; }
-  body::before, .whatsapp-float::after { display: none !important; }
+  .whatsapp-float::after { display: none !important; }
   .hero-text > *, .hero-image { animation: none !important; }
 }

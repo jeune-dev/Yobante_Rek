@@ -1,4 +1,3 @@
-// src/components/sections/Faq.jsx
 import { useState } from 'react';
 
 const faqs = [
@@ -16,12 +15,6 @@ const faqs = [
   }
 ];
 
-const boutiqueFaqs = [
-  { q: "Quels produits puis-je commander ?", a: "YOBANTÉ Boutique propose des produits alimentaires, de mode, de maison, d'électronique, d'hygiène et de sport selon les disponibilités du catalogue." },
-  { q: "Comment passer une commande ?", a: "Sélectionnez vos produits, validez votre panier puis choisissez votre mode de paiement et votre adresse de livraison." },
-  { q: "Quels sont les moyens de paiement acceptés ?", a: "Le paiement peut être effectué avec Orange Money, Wave ainsi que les autres moyens proposés lors de la validation de la commande." }
-];
-
 const PlusIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: 17, height: 17 }}>
     <path d="M12 5V19" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
@@ -29,9 +22,9 @@ const PlusIcon = () => (
   </svg>
 );
 
-const Faq = ({ variant = 'rek' }) => {
+const Faq = () => {
   const [activeFaq, setActiveFaq] = useState(0);
-  const visibleFaqs = variant === 'boutique' ? boutiqueFaqs : faqs;
+  const visibleFaqs = faqs;
 
   const toggle = (i) => { setActiveFaq(activeFaq === i ? null : i); };
 
@@ -81,20 +74,11 @@ const Faq = ({ variant = 'rek' }) => {
 
       </div>
 
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .faq-section {
           position: relative; overflow: hidden;
           padding: calc(var(--section-y) * 0.9) 0;
-          background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
-        }
-
-        .faq-section::before {
-          content: '';
-          position: absolute;
-          width: 500px; height: 500px; border-radius: 50%;
-          background: radial-gradient(circle, rgba(245,197,24,0.07) 0%, transparent 70%);
-          top: -100px; right: -120px;
-          pointer-events: none;
+          background: #f8fbff;
         }
 
         .faq-container {
@@ -166,7 +150,7 @@ const Faq = ({ variant = 'rek' }) => {
 
         .faq-number {
           min-width: 46px; height: 46px; border-radius: 14px;
-          background: linear-gradient(135deg, rgba(30,58,138,.1), rgba(30,58,138,.06));
+          background: rgba(30,58,138,.08);
           color: #1E3A8A;
           display: flex; align-items: center; justify-content: center;
           font-weight: 900; font-size: 14px;
@@ -175,7 +159,7 @@ const Faq = ({ variant = 'rek' }) => {
         }
 
         .faq-item.open .faq-number {
-          background: linear-gradient(135deg, #1E3A8A, #2a52c9);
+          background: #1E3A8A;
           color: white; border-color: transparent;
           box-shadow: 0 4px 14px rgba(30,58,138,.28);
         }
@@ -226,7 +210,7 @@ const Faq = ({ variant = 'rek' }) => {
           .faq-question { overflow-wrap: anywhere; }
           .faq-question { font-size: 14px; }
         }
-      `}</style>
+      ` }} />
     </section>
   );
 };

@@ -1,4 +1,3 @@
-// src/components/layout/Navbar.jsx
 import { useEffect, useRef, useState } from 'react';
 import logo from '../../assets/images/Logo Yobante Rek - fond blanc.webp';
 
@@ -155,7 +154,7 @@ const Navbar = ({ scrolled, hidden, scrollTo }) => {
         </div>
       </nav>
 
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .navbar {
           position: fixed;
           top: 0;
@@ -180,9 +179,9 @@ const Navbar = ({ scrolled, hidden, scrollTo }) => {
 
         .nav-container {
           width: 100%;
-          max-width: var(--container-max);
+          max-width: none;
           margin: 0 auto;
-          padding: 0 var(--gutter);
+          padding: 0 clamp(var(--gutter), 5vw, 96px);
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -201,7 +200,7 @@ const Navbar = ({ scrolled, hidden, scrollTo }) => {
         }
 
         .navbar .logo-img {
-          height: calc(var(--nav-h) - 18px);
+          height: calc(var(--nav-h) - 12px);
           width: auto;
           object-fit: contain;
         }
@@ -402,10 +401,10 @@ const Navbar = ({ scrolled, hidden, scrollTo }) => {
 
         @media (max-width: 480px) {
           .navbar .logo-img {
-            height: calc(var(--nav-h) - 24px);
+            height: calc(var(--nav-h) - 14px);
           }
         }
-      `}</style>
+      ` }} />
     </>
   );
 };

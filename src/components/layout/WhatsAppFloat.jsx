@@ -21,14 +21,14 @@ const WhatsAppFloat = () => {
         )}
       </a>
 
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .whatsapp-float {
           position: fixed;
           bottom: calc(var(--fab-gap) + env(safe-area-inset-bottom, 0px));
           right: calc(var(--fab-gap) + env(safe-area-inset-right, 0px));
           width: var(--fab-size);
           height: var(--fab-size);
-          background: linear-gradient(135deg, #25D366, #1ebe57);
+          background: #25D366;
           border-radius: 50%;
           display: flex;
           align-items: center;
@@ -44,7 +44,7 @@ const WhatsAppFloat = () => {
           transform: scale(1.1);
           box-shadow: 0 10px 32px rgba(37, 211, 102, 0.55);
         }
-      `}</style>
+      ` }} />
     </>
   );
 };

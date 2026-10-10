@@ -1,4 +1,3 @@
-// src/components/sections/Contact.jsx
 import { useRef, useState } from 'react';
 import { Mail, MessageCircle, Phone, CheckCircle, XCircle, ArrowRight } from 'lucide-react';
 
@@ -6,8 +5,7 @@ import { Mail, MessageCircle, Phone, CheckCircle, XCircle, ArrowRight } from 'lu
 const REQUEST_TIMEOUT_MS = 15000;
 const MSG_GENERIC = 'Une erreur s\u2019est produite. Réessayez dans un instant.';
 
-const Contact = ({ variant = 'rek' }) => {
-  const isBoutique = variant === 'boutique';
+const Contact = () => {
   const phoneNumber = import.meta.env.VITE_CONTACT_PHONE;
   const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER?.replace(/\D/g, '');
   const [formData, setFormData] = useState({ prenom: '', nom: '', email: '', telephone: '', sujet: '', message: '' });
@@ -29,7 +27,7 @@ const Contact = ({ variant = 'rek' }) => {
     if (sending.current) return;
 
     const payload = {
-      source: isBoutique ? 'boutique' : 'rek',
+      source: 'rek',
       prenom: formData.prenom.trim(),
       nom: formData.nom.trim(),
       email: formData.email.trim(),
@@ -83,8 +81,6 @@ const Contact = ({ variant = 'rek' }) => {
 
   return (
     <section id="contact" className="contact-section">
-      <div className="bg-glow glow-1"></div>
-      <div className="bg-glow glow-2"></div>
 
       <div className="container">
         <div className="contact-grid">
@@ -97,7 +93,7 @@ const Contact = ({ variant = 'rek' }) => {
             </div>
             <h2 className="contact-title">Contactez-nous</h2>
             <p className="contact-description">
-              {isBoutique ? 'Notre équipe vous accompagne pour vos achats et vos livraisons au Sénégal.' : 'Notre service client est disponible pour répondre à toutes vos questions.'}
+              Notre service client est disponible pour répondre à toutes vos questions.
             </p>
 
             <div className="contact-info-list">
@@ -132,7 +128,6 @@ const Contact = ({ variant = 'rek' }) => {
 
           {/* RIGHT */}
           <div className="form-wrapper sr-r">
-            <div className="form-glow"></div>
             <form className="contact-form" onSubmit={handleSubmit}>
               <div className="form-header">
                 <h3>Avez-vous une question ?</h3>
@@ -177,16 +172,9 @@ const Contact = ({ variant = 'rek' }) => {
               <div className="form-group">
                 <select name="sujet" aria-label="Sujet de votre demande" value={formData.sujet} onChange={handleChange} required>
                   <option value="" disabled hidden>Sélectionner un sujet</option>
-                  {!isBoutique && <>
-                    <option value="Demande de devis - Produit max 30kg">Demande de devis - Produit max 30kg</option>
-                    <option value="Demande de devis - Gros colis">Demande de devis - Gros colis</option>
-                    <option value="Envoi de documents">Envoi de documents</option>
-                  </>}
-                  {isBoutique && <>
-                    <option value="Commande boutique">Commande boutique</option>
-                    <option value="Livraison au Sénégal">Livraison au Sénégal</option>
-                    <option value="Produit indisponible">Produit indisponible</option>
-                  </>}
+                  <option value="Demande de devis - Produit max 30kg">Demande de devis - Produit max 30kg</option>
+                  <option value="Demande de devis - Gros colis">Demande de devis - Gros colis</option>
+                  <option value="Envoi de documents">Envoi de documents</option>
                   <option value="Autres">Autres</option>
                 </select>
               </div>
@@ -220,7 +208,7 @@ const Contact = ({ variant = 'rek' }) => {
         </div>
       </div>
 
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .contact-section {
           position: relative; overflow: hidden;
           padding: var(--section-y) 0; background: #f8fbff;
@@ -230,14 +218,6 @@ const Contact = ({ variant = 'rek' }) => {
           display: grid; grid-template-columns: 1fr 1.15fr;
           gap: clamp(40px, 6vw, 70px); align-items: center;
         }
-
-        .contact-section .bg-glow {
-          position: absolute; border-radius: 50%;
-          filter: blur(120px); opacity: 0.3; pointer-events: none;
-        }
-
-        .contact-section .glow-1 { width: 400px; height: 400px; background: #1e3a8a; top: -90px; left: -90px; }
-        .contact-section .glow-2 { width: 320px; height: 320px; background: #F5C518; bottom: -90px; right: -70px; }
 
         .contact-section .section-tag {
           display: inline-flex; align-items: center; gap: 12px;
@@ -264,7 +244,6 @@ const Contact = ({ variant = 'rek' }) => {
           padding: 16px 18px;
           background: rgba(255,255,255,0.82);
           border-radius: 20px;
-          backdrop-filter: blur(14px);
           border: 1px solid rgba(255,255,255,0.6);
           transition: transform 0.28s cubic-bezier(0.22,1,0.36,1), box-shadow 0.28s ease;
         }
@@ -277,7 +256,7 @@ const Contact = ({ variant = 'rek' }) => {
 
         .contact-icon {
           width: 54px; height: 54px; border-radius: 16px;
-          background: linear-gradient(135deg, #EEF2FF, white);
+          background: #EEF2FF;
           display: flex; align-items: center; justify-content: center;
           box-shadow: 0 6px 18px rgba(30,58,138,.08); flex-shrink: 0;
           border: 1px solid rgba(30,58,138,.08);
@@ -298,18 +277,10 @@ const Contact = ({ variant = 'rek' }) => {
         .form-wrapper {
           position: relative; overflow: hidden;
           background: rgba(255,255,255,.92);
-          backdrop-filter: blur(20px);
           border-radius: 30px; padding: 38px;
           border: 1px solid rgba(255,255,255,.7);
           box-shadow: 0 20px 56px rgba(30,58,138,.1);
         }
-
-        .form-glow {
-          position: absolute; width: 240px; height: 240px;
-          background: rgba(30,58,138,.08); border-radius: 50%;
-          filter: blur(70px); top: -90px; right: -70px;
-        }
-
         .form-header { margin-bottom: 26px; }
 
         .form-header h3 { color: #1e3a8a; font-size: 24px; font-weight: 900; margin-bottom: 6px; }
@@ -350,42 +321,15 @@ const Contact = ({ variant = 'rek' }) => {
           box-shadow: 0 0 0 3px rgba(30,58,138,.08);
         }
 
-        /* PHONE INPUT */
-        .phone-input-wrapper {
-          display: flex; align-items: center;
-          background: #f8fafc;
-          border-radius: 14px;
-          border: 1px solid transparent;
-          transition: 0.25s;
-          overflow: hidden;
-        }
-
-        .phone-input-wrapper:focus-within {
-          background: white;
-          border-color: #1e3a8a;
-          box-shadow: 0 0 0 3px rgba(30,58,138,.08);
-        }
-
+        .phone-input-wrapper { position: relative; }
         .phone-prefix {
-          display: flex; align-items: center; justify-content: center;
-          padding: 0 14px;
+          position: absolute; top: 50%; left: 14px;
+          display: flex; align-items: center;
           color: #25D366;
-          flex-shrink: 0;
+          transform: translateY(-50%);
+          pointer-events: none;
         }
-
-        .phone-input {
-          flex: 1; border: none !important;
-          background: transparent !important;
-          border-radius: 0 !important;
-          box-shadow: none !important;
-          padding: 14px 16px 14px 4px !important;
-        }
-
-        .phone-input:focus {
-          background: transparent !important;
-          border-color: transparent !important;
-          box-shadow: none !important;
-        }
+        .phone-input { padding-left: 42px; }
 
         textarea { resize: none; min-height: 120px; text-overflow: clip; }
 
@@ -422,7 +366,7 @@ const Contact = ({ variant = 'rek' }) => {
 
         .submit-btn {
           width: 100%; min-height: 52px; border: none; padding: 16px; border-radius: 16px;
-          background: linear-gradient(135deg, #1e3a8a 0%, #2a52c9 100%);
+          background: #1e3a8a;
           color: white;
           font-size: 15px; font-weight: 800; cursor: pointer;
           transition: all 0.3s ease;
@@ -449,7 +393,7 @@ const Contact = ({ variant = 'rek' }) => {
           .form-wrapper { padding: 22px 14px; border-radius: 22px; }
           .contact-title { font-size: 32px; }
         }
-      `}</style>
+      ` }} />
     </section>
   );
 };

@@ -1,4 +1,3 @@
-// src/App.js
 import { useState, useEffect } from 'react';
 import { ArrowUp } from 'lucide-react';
 import './styles/global.css';
@@ -81,15 +80,15 @@ function App() {
       <a className="skip-link" href="#contenu">Aller au contenu</a>
       <Navbar scrolled={scrolled} hidden={hidden} scrollTo={scrollTo} />
       <main id="contenu" tabIndex={-1}>
-        <Hero scrollTo={scrollTo} variant="rek" />
-        <TrustBar variant="rek" />
-        <Services scrollTo={scrollTo} variant="rek" />
+        <Hero scrollTo={scrollTo} />
+        <TrustBar />
+        <Services scrollTo={scrollTo} />
         <HowItWorks />
         <ShippingModes />
-        <Applications variant="rek" />
-        <Faq variant="rek" />
-        <Contact scrollTo={scrollTo} variant="rek" />
-        <AboutSection variant="rek" />
+        <Applications />
+        <Faq />
+        <Contact />
+        <AboutSection />
       </main>
       <Footer />
       {/* Boutons flottants : regroupés dans un repère pour les lecteurs d'écran. */}

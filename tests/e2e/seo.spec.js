@@ -52,13 +52,20 @@ test.describe('SEO', () => {
     await gotoHome(page);
     const raw = await page.locator('script[type="application/ld+json"]').allTextContents();
     expect(raw.length).toBeGreaterThan(0);
-    for (const text of raw) {
-      const data = JSON.parse(text);
-      expect(data['@context']).toBe('https://schema.org');
-      expect(data['@type']).toBe('Organization');
-      expect(data.url).toBe(`${site.domain}/`);
-      expect(data.name).toBeTruthy();
-    }
+    const items = raw.map((text) => JSON.parse(text));
+    for (const data of items) expect(data['@context']).toBe('https://schema.org');
+    const org = items.find((data) => data['@type'] === 'Organization');
+    expect(org, 'bloc Organization présent').toBeTruthy();
+    expect(org.url).toBe(`${site.domain}/`);
+    expect(org.name).toBeTruthy();
+    const faq = items.find((data) => data['@type'] === 'FAQPage');
+    expect(faq?.mainEntity?.length, 'FAQPage décrit les questions de la FAQ').toBeGreaterThan(0);
+  });
+
+  test('le contenu est présent dans le HTML, sans JavaScript (pré-rendu)', async ({ request, baseURL }) => {
+    const html = await (await request.get(`${baseURL}/`)).text();
+    expect(html).toMatch(/<h1[^>]*>/);
+    expect(html).toContain('Questions fréquentes');
   });
 
   test('robots.txt autorise l’indexation et annonce le sitemap', async ({ request, baseURL }) => {
@@ -75,7 +82,11 @@ test.describe('SEO', () => {
     expect(response.status()).toBe(200);
     expect(response.headers()['content-type']).toMatch(/xml/);
     const locs = [...(await response.text()).matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1]);
-    expect(locs).toEqual([`${site.domain}/`]);
+    expect(locs[0]).toBe(`${site.domain}/`);
+    for (const loc of locs) {
+      expect(loc.startsWith(`${site.domain}/`), loc).toBe(true);
+      expect((await request.get(`${baseURL}${new URL(loc).pathname}`)).status(), loc).toBe(200);
+    }
   });
 
   test('le favicon est servi', async ({ request, baseURL }) => {
