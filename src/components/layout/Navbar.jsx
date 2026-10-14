@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import logo from '../../assets/images/Logo Yobante Rek - fond blanc.webp';
+import { navbar } from '../../data/content';
 
 const navItems = [
   { label: 'Services', id: 'services' },
@@ -20,8 +20,7 @@ const Navbar = ({ scrolled, hidden, scrollTo }) => {
     setMobileMenuOpen(false);
   };
 
-  // Section affichée : la rubrique correspondante du menu est mise en valeur,
-  // pour que le visiteur sache toujours où il se trouve sur la page.
+  // Met en valeur la rubrique de la section affichée.
   useEffect(() => {
     if (!('IntersectionObserver' in window)) return undefined;
     const ratios = new Map();
@@ -44,8 +43,7 @@ const Navbar = ({ scrolled, hidden, scrollTo }) => {
     return () => observer.disconnect();
   }, []);
 
-  // Menu mobile ouvert : fermeture au tap à l'extérieur, sur Échap
-  // (le focus revient alors sur le bouton) et au passage en affichage desktop.
+  // Fermeture du menu mobile : clic extérieur, Échap ou passage en desktop.
   useEffect(() => {
     if (!mobileMenuOpen) return undefined;
 
@@ -71,7 +69,6 @@ const Navbar = ({ scrolled, hidden, scrollTo }) => {
     };
   }, [mobileMenuOpen]);
 
-  // La barre se masque au défilement vers le bas, sauf si le menu est ouvert.
   const isHidden = hidden && !mobileMenuOpen;
 
   return (
@@ -83,19 +80,17 @@ const Navbar = ({ scrolled, hidden, scrollTo }) => {
       >
         <div className="nav-container">
 
-          {/* Logo */}
           <button className="logo" onClick={() => handleScroll('hero')}>
             <img
-              src={logo}
+              src={navbar.logo}
               alt="YOBANTÉ Logo"
               className="logo-img"
-              width="600"
-              height="244"
+              width={navbar.logoSize.width}
+              height={navbar.logoSize.height}
               decoding="async"
             />
           </button>
 
-          {/* Desktop Links */}
           <div className="nav-links desktop-links">
             {navItems.map((item) => (
               <button
@@ -109,15 +104,14 @@ const Navbar = ({ scrolled, hidden, scrollTo }) => {
             ))}
           </div>
 
-          {/* Desktop CTA */}
           <button
+            type="button"
             className="nav-cta"
             onClick={() => handleScroll('contact')}
           >
             Nous contacter
           </button>
 
-          {/* Burger */}
           <button
             ref={burgerRef}
             className={`burger ${mobileMenuOpen ? 'active' : ''}`}
@@ -132,7 +126,6 @@ const Navbar = ({ scrolled, hidden, scrollTo }) => {
           </button>
         </div>
 
-        {/* Mobile Menu */}
         <div id="mobile-menu" className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
           {navItems.map((item) => (
             <button
@@ -166,7 +159,7 @@ const Navbar = ({ scrolled, hidden, scrollTo }) => {
           align-items: center;
           transition: transform 0.35s ease, box-shadow 0.3s ease;
           background: #ffffff;
-          border-bottom: 1px solid rgba(0,0,0,.06);
+          border-bottom: 1px solid var(--border);
         }
 
         .navbar.nav-hidden {
@@ -174,21 +167,20 @@ const Navbar = ({ scrolled, hidden, scrollTo }) => {
         }
 
         .navbar.scrolled {
-          box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+          box-shadow: var(--shadow-sm);
         }
 
         .nav-container {
           width: 100%;
-          max-width: none;
+          max-width: var(--container-max);
           margin: 0 auto;
-          padding: 0 clamp(var(--gutter), 5vw, 96px);
+          padding: 0 var(--gutter);
           display: flex;
           align-items: center;
           justify-content: space-between;
           gap: clamp(12px, 2vw, 20px);
         }
 
-        /* Logo */
         .logo {
           border: none;
           background: transparent;
@@ -199,14 +191,13 @@ const Navbar = ({ scrolled, hidden, scrollTo }) => {
           flex-shrink: 0;
         }
 
+        /* Logo recadré au plus près : même hauteur visible sur les deux sites. */
         .navbar .logo-img {
-          height: calc(var(--nav-h) - 12px);
+          display: block;
+          height: 36px;
           width: auto;
-          object-fit: contain;
         }
 
-        /* Desktop Nav : l'écart se réduit avec la largeur pour que les
-           5 liens + le CTA tiennent dès 901px sans passer sous le logo. */
         .desktop-links {
           display: flex;
           align-items: center;
@@ -217,9 +208,9 @@ const Navbar = ({ scrolled, hidden, scrollTo }) => {
           border: none;
           background: transparent;
           cursor: pointer;
-          font-size: 15px;
+          font-size: 14.5px;
           font-weight: 600;
-          color: #0f172a;
+          color: var(--text-dark);
           white-space: nowrap;
           transition: color 0.3s ease;
           position: relative;
@@ -232,12 +223,12 @@ const Navbar = ({ scrolled, hidden, scrollTo }) => {
           bottom: -6px;
           width: 0%;
           height: 2px;
-          background: #1E3A8A;
+          background: var(--blue);
           transition: width 0.3s ease;
         }
 
         .desktop-links button:hover {
-          color: #1E3A8A;
+          color: var(--blue);
         }
 
         .desktop-links button:hover::after,
@@ -246,44 +237,38 @@ const Navbar = ({ scrolled, hidden, scrollTo }) => {
         }
 
         .desktop-links button.active {
-          color: #1E3A8A;
+          color: var(--blue);
         }
 
-        /* CTA */
         .nav-cta {
           border: none;
-          background: #1E3A8A;
+          background: var(--blue);
           color: white;
-          padding: 8px 17px;
-          border-radius: 50px;
+          min-height: 40px;
+          padding: 0 18px;
+          border-radius: 999px;
           font-size: 14px;
           font-weight: 700;
           white-space: nowrap;
           flex-shrink: 0;
           cursor: pointer;
-          transition: all 0.3s ease;
-          box-shadow: 0 8px 20px rgba(0, 191, 255, 0.18);
+          transition: background 0.2s ease;
         }
 
-        .nav-cta:hover {
-          transform: translateY(-2px);
-          background: #1A3278;
-        }
+        .nav-cta:hover { background: var(--blue-dark); }
 
-        /* Tablette en paysage (≥901px) : doigt, pas souris → cibles de 44px. */
         @media (pointer: coarse) {
           .nav-cta { min-height: var(--tap); padding-inline: 20px; }
           .desktop-links button { min-height: var(--tap); }
         }
 
-        /* Burger */
         .burger {
           width: var(--tap);
           height: var(--tap);
           flex-shrink: 0;
           border-radius: 12px;
           border: none;
-          background: #f8fafc;
+          background: var(--surface);
           display: none;
           flex-direction: column;
           justify-content: center;
@@ -301,8 +286,6 @@ const Navbar = ({ scrolled, hidden, scrollTo }) => {
           transition: transform 0.3s ease, opacity 0.3s ease;
         }
 
-        /* Pas de 7px entre deux barres (2px + gap 5px) : la croix se referme
-           exactement au centre du bouton. */
         .burger.active span:nth-child(1) {
           transform: translateY(7px) rotate(45deg);
         }
@@ -315,9 +298,6 @@ const Navbar = ({ scrolled, hidden, scrollTo }) => {
           transform: translateY(-7px) rotate(-45deg);
         }
 
-        /* Mobile Menu : jamais plus haut que l'écran (paysage inclus),
-           défile en interne si besoin, et sort de l'ordre de tabulation
-           lorsqu'il est fermé (visibility). */
         .mobile-menu {
           position: absolute;
           top: 100%;
@@ -350,28 +330,28 @@ const Navbar = ({ scrolled, hidden, scrollTo }) => {
 
         .mobile-link {
           border: none;
-          background: #f8fafc;
+          background: var(--surface);
           min-height: var(--tap);
           padding: 14px 18px;
           border-radius: 14px;
           text-align: left;
           font-size: 16px;
           font-weight: 600;
-          color: #0f172a;
+          color: var(--text-dark);
           cursor: pointer;
           transition: background 0.3s ease, color 0.3s ease;
         }
 
         .mobile-link:hover,
         .mobile-link.active {
-          background: #EEF2FF;
-          color: #1E3A8A;
+          background: var(--blue-50);
+          color: var(--blue);
         }
 
         .mobile-cta {
           margin-top: 8px;
           border: none;
-          background: #1E3A8A;
+          background: var(--blue);
           color: white;
           min-height: var(--tap);
           padding: 16px;
@@ -381,7 +361,6 @@ const Navbar = ({ scrolled, hidden, scrollTo }) => {
           cursor: pointer;
         }
 
-        /* Responsive */
         @media (max-width: 900px) {
           .desktop-links,
           .nav-cta {
@@ -400,9 +379,7 @@ const Navbar = ({ scrolled, hidden, scrollTo }) => {
         }
 
         @media (max-width: 480px) {
-          .navbar .logo-img {
-            height: calc(var(--nav-h) - 14px);
-          }
+          .navbar .logo-img { height: 32px; }
         }
       ` }} />
     </>

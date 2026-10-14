@@ -1,12 +1,15 @@
-import { Plane, ArrowRight, ShieldCheck, Timer, Tag, Smartphone } from 'lucide-react';
+// Hero — identique sur YOBANTÉ Boutique et YOBANTÉ REK.
+// Textes, icônes et thème (fond du visuel) viennent de src/data/content.js.
+// Le visuel est servi depuis public/images/hero-visuel.webp (préchargé dans index.html).
+import { ArrowRight } from 'lucide-react';
+import { hero } from '../../data/content';
 
-// Servi depuis public/ (URL stable) pour être préchargé dans index.html.
-const HERO_IMAGE = '/images/hero-rek.webp';
+const HERO_IMAGE = '/images/hero-visuel.webp';
 const APP_STORE_URL = 'https://apps.apple.com';
 const PLAY_STORE_URL = 'https://play.google.com';
 
 const AppStoreIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
     <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
   </svg>
 );
@@ -17,308 +20,299 @@ const PlayStoreIcon = () => (
   </svg>
 );
 
-const BENEFITS = [
-  { icon: ShieldCheck, title: 'Sécurité garantie', text: 'Vos colis entre de bonnes mains' },
-  { icon: Timer, title: 'Livraison rapide', text: 'En France et au Sénégal' },
-  { icon: Tag, title: 'Prix compétitifs', text: 'Des offres adaptées à vos besoins' },
-];
+const Hero = ({ scrollTo }) => {
+  const { badge, primary, secondary } = hero;
+  const BadgeIcon = badge.icon;
+  const PrimaryIcon = primary.icon;
+  const SecondaryIcon = secondary.icon;
 
-const Hero = ({ scrollTo }) => (
-  <section id="hero" className="hero rek-hero">
-    <div className="hero-container">
-      <div className="hero-content">
-        <div className="hero-text">
-          <p className="hero-badge">
-            <span className="badge-mark" aria-hidden="true" />
-            Expédition de colis - Sénégal ↔ France
-          </p>
+  return (
+    <section id="hero" className={`hero hero--${hero.theme}`} style={{ '--hero-bg': hero.background }}>
+      <div className="hero-container">
+        <div className="hero-content">
+          <div className="hero-text">
+            <p className="hero-badge">
+              <BadgeIcon size={14} strokeWidth={2.2} aria-hidden="true" />
+              {badge.label}
+            </p>
 
-          <h1 className="hero-title">
-            <span className="rek-title-line">Vos colis <span>Sénégal ↔ France</span></span>
-            <span className="rek-title-line">en toute simplicité !</span>
-          </h1>
+            <h1 className="hero-title">
+              {hero.title.map(({ text, accent }) => (
+                <span key={text} className={accent ? 'hero-accent' : undefined}>{text}</span>
+              ))}
+            </h1>
 
-          <p className="rek-description">
-            Yobante Rek vous accompagne dans l'envoi de vos colis entre le Sénégal et la France.
-            Rapide, sécurisé et à prix compétitif.
-          </p>
+            <p className="hero-sub">{hero.text}</p>
 
-          <ul className="rek-benefits">
-            {BENEFITS.map(({ icon: Icon, title, text }) => (
-              <li key={title} className="rek-benefit">
-                <span className="rek-benefit-icon"><Icon size={21} strokeWidth={2} aria-hidden="true" /></span>
-                <span><strong>{title}</strong><small>{text}</small></span>
-              </li>
-            ))}
-          </ul>
+            <div className="hero-actions">
+              <button type="button" className="hero-btn hero-btn-primary" onClick={() => scrollTo(primary.target)}>
+                <PrimaryIcon size={16} strokeWidth={2.2} aria-hidden="true" />
+                {primary.label}
+                <ArrowRight size={16} strokeWidth={2.2} aria-hidden="true" />
+              </button>
+              <button type="button" className="hero-btn hero-btn-outline" onClick={() => scrollTo(secondary.target)}>
+                <SecondaryIcon size={16} strokeWidth={2} aria-hidden="true" />
+                {secondary.label}
+              </button>
+            </div>
 
-          <div className="rek-actions">
-            <button type="button" className="hero-btn rek-primary" onClick={() => scrollTo('apps')}>
-              <Smartphone size={17} strokeWidth={2} aria-hidden="true" /> Télécharger l'application
-              <ArrowRight size={16} strokeWidth={2} aria-hidden="true" />
-            </button>
-            <button type="button" className="hero-btn rek-secondary" onClick={() => scrollTo('services')}>
-              <Plane size={17} strokeWidth={2} aria-hidden="true" /> Découvrir nos services
-            </button>
+            <div className="store-buttons">
+              <a href={APP_STORE_URL} target="_blank" rel="noreferrer" className="store-btn">
+                <AppStoreIcon />
+                <span className="store-text"><small>Télécharger sur</small><strong>App Store</strong></span>
+              </a>
+              <a href={PLAY_STORE_URL} target="_blank" rel="noreferrer" className="store-btn">
+                <PlayStoreIcon />
+                <span className="store-text"><small>Disponible sur</small><strong>Google Play</strong></span>
+              </a>
+            </div>
           </div>
 
-          <div className="store-buttons">
-            <a href={APP_STORE_URL} target="_blank" rel="noreferrer" className="store-btn">
-              <AppStoreIcon />
-              <span className="store-text"><small>Télécharger sur</small><strong>App Store</strong></span>
-            </a>
-            <a href={PLAY_STORE_URL} target="_blank" rel="noreferrer" className="store-btn">
-              <PlayStoreIcon />
-              <span className="store-text"><small>Disponible sur</small><strong>Google Play</strong></span>
-            </a>
+          <div className="hero-image">
+            <img
+              src={HERO_IMAGE}
+              alt={hero.image.alt}
+              width="1400"
+              height="955"
+              decoding="async"
+              fetchpriority="high"
+            />
           </div>
         </div>
 
-        <div className="hero-image">
-          <img
-            src={HERO_IMAGE}
-            alt="Application Yobanté Rek pour l'envoi de colis entre la France et le Sénégal"
-            width="1203"
-            height="793"
-            decoding="async"
-            fetchpriority="high"
-          />
-        </div>
+        <ul className="hero-features" style={{ '--count': hero.features.length }}>
+          {hero.features.map(({ icon: Icon, title, text }) => (
+            <li key={title} className="hero-feature">
+              <span className="hero-feature-icon"><Icon size={20} strokeWidth={1.8} aria-hidden="true" /></span>
+              <span><strong>{title}</strong><span>{text}</span></span>
+            </li>
+          ))}
+        </ul>
       </div>
-    </div>
 
-    <style dangerouslySetInnerHTML={{ __html: `
-      .rek-hero {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        min-height: calc(100vh - var(--nav-h));
-        min-height: calc(100svh - var(--nav-h));
-        margin-top: var(--nav-h);
-        scroll-margin-top: var(--nav-h);
-        overflow: hidden;
-        background: #fff;
-      }
+      <style dangerouslySetInnerHTML={{ __html: `
+        .hero {
+          /* Thème « dark » : visuel sur fond bleu. */
+          --hero-text: #fff;
+          --hero-text-soft: rgba(255, 255, 255, 0.86);
+          --hero-line: rgba(255, 255, 255, 0.16);
+          --hero-outline: rgba(255, 255, 255, 0.6);
+          --hero-outline-hover: rgba(255, 255, 255, 0.08);
+          --hero-feature-bg: rgba(246, 197, 55, 0.14);
+          --hero-feature-icon: var(--gold);
 
-      .rek-hero .hero-container {
-        position: relative;
-        z-index: 5;
-        width: 100%;
-        max-width: none;
-        padding: 40px clamp(var(--gutter), 5vw, 96px) 38px;
-      }
-
-      .rek-hero .hero-content {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 48px;
-        min-height: min(720px, calc(100vh - var(--nav-h) - 62px));
-      }
-
-      .rek-hero .hero-text {
-        position: relative;
-        z-index: 4;
-        display: flex;
-        flex: 0 0 47%;
-        flex-direction: column;
-        justify-content: center;
-        max-width: 700px;
-      }
-
-      .rek-hero .hero-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 9px;
-        width: fit-content;
-        margin-bottom: 20px;
-        padding: 8px 14px;
-        border-radius: 999px;
-        background: #fff3ca;
-        color: #10264d;
-        font-size: 13px;
-        font-weight: 600;
-      }
-      .badge-mark {
-        flex-shrink: 0;
-        width: 9px;
-        height: 9px;
-        margin: 0 4px;
-        border: 2px solid #f5c518;
-        border-radius: 3px;
-        transform: rotate(45deg);
-      }
-
-      .rek-hero .hero-title {
-        display: flex;
-        flex-direction: column;
-        margin: 0 0 16px;
-        color: #10264d;
-        font-size: clamp(38px, 3vw, 54px);
-        font-weight: 900;
-        line-height: 1.04;
-        letter-spacing: -1.2px;
-      }
-      .rek-title-line { display: block; width: fit-content; max-width: 100%; }
-      .rek-title-line:first-child span { color: #f5bd00; white-space: nowrap; }
-      @media (min-width: 1280px) {
-        .rek-title-line:first-child { white-space: nowrap; }
-      }
-
-      .rek-description {
-        max-width: 470px;
-        margin: 0 0 26px;
-        color: #65738b;
-        font-size: 16px;
-        line-height: 1.5;
-      }
-
-      .rek-benefits {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 16px;
-        max-width: 580px;
-        margin-bottom: 28px;
-        list-style: none;
-      }
-      .rek-benefit { display: flex; flex-direction: column; gap: 9px; color: #10264d; }
-      .rek-benefit-icon {
-        display: grid;
-        place-items: center;
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        background: #fff2c3;
-        color: #10264d;
-      }
-      .rek-benefit strong { display: block; font-size: 13px; font-weight: 800; }
-      .rek-benefit small { display: block; max-width: 130px; margin-top: 4px; color: #5b6a82; font-size: 12px; line-height: 1.35; }
-
-      .rek-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
-      .rek-hero .hero-btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 9px;
-        max-width: 100%;
-        min-height: 50px;
-        padding: 0 21px;
-        border: none;
-        border-radius: 999px;
-        font-size: 14px;
-        font-weight: 800;
-        white-space: nowrap;
-        cursor: pointer;
-        transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease, background 0.2s ease;
-      }
-      .rek-primary { background: #f5c518; color: #10264d; box-shadow: 0 10px 28px rgba(245, 197, 24, 0.38); }
-      .rek-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 36px rgba(245, 197, 24, 0.45); }
-      .rek-hero .rek-secondary { border: 1.5px solid #183d7d; background: #fff; color: #183d7d; }
-      .rek-secondary:hover { background: #f5f8fc; }
-
-      .rek-hero .store-buttons { display: flex; flex-wrap: wrap; gap: 12px; }
-      .rek-hero .store-btn {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        min-width: 126px;
-        min-height: var(--tap);
-        padding: 8px 12px;
-        border: 1px solid #303030;
-        border-radius: 7px;
-        background: #090909;
-        color: #fff;
-        text-decoration: none;
-        transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-      }
-      .rek-hero .store-btn:hover { transform: translateY(-2px); }
-      .store-text { display: flex; flex-direction: column; line-height: 1.1; }
-      .store-text small { font-size: 10px; opacity: 0.8; }
-      .store-text strong { font-size: 13px; font-weight: 800; letter-spacing: 0.1px; }
-
-      .rek-hero .hero-image {
-        position: absolute;
-        inset: 0 calc(clamp(var(--gutter), 5vw, 96px) * -1) 0 42%;
-        z-index: 1;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        overflow: hidden;
-      }
-      .rek-hero .hero-image::before {
-        content: '';
-        position: absolute;
-        inset: 0 auto 0 0;
-        z-index: 2;
-        width: 12%;
-        background: linear-gradient(90deg, #fff 0%, rgba(255, 255, 255, 0) 100%);
-        pointer-events: none;
-      }
-      .rek-hero .hero-image img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        max-height: 700px;
-        object-fit: contain;
-        object-position: right center;
-        transform: scale(1.04);
-        transform-origin: right center;
-      }
-
-      @media (min-width: 981px) and (max-width: 1279px) {
-        .rek-hero .hero-text { flex-basis: 52%; }
-        .rek-hero .hero-image { left: 52%; }
-      }
-
-      @media (max-width: 980px) {
-        .rek-hero { min-height: auto; }
-        .rek-hero .hero-container { padding: 44px var(--gutter) 42px; }
-        .rek-hero .hero-content { flex-direction: column; gap: 26px; min-height: 0; text-align: center; }
-        .rek-hero .hero-text { flex: 0 0 auto; align-items: center; width: 100%; max-width: 650px; }
-        .rek-hero .hero-title { font-size: clamp(36px, 6vw, 48px); }
-        .rek-description { max-width: 560px; }
-        .rek-benefits { width: 100%; text-align: left; }
-        .rek-actions, .rek-hero .store-buttons { justify-content: center; }
-        .rek-hero .hero-image {
           position: relative;
-          inset: auto;
+          display: flex;
+          align-items: center;
           justify-content: center;
           width: 100%;
-          height: auto;
+          min-height: min(calc(100vh - var(--nav-h)), 820px);
+          min-height: min(calc(100svh - var(--nav-h)), 820px);
+          margin-top: var(--nav-h);
+          scroll-margin-top: var(--nav-h);
+          overflow: hidden;
+          background: var(--hero-bg);
+          color: var(--hero-text);
         }
-        .rek-hero .hero-image::before { display: none; }
-        .rek-hero .hero-image img {
-          width: 100%;
-          max-width: 680px;
-          height: auto;
-          max-height: none;
-          transform: none;
-          -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 12%, #000 82%, transparent 100%);
-          mask-image: linear-gradient(to right, transparent 0%, #000 12%, #000 82%, transparent 100%);
+        /* Thème « light » : visuel sur fond blanc. */
+        .hero--light {
+          --hero-text: var(--blue);
+          --hero-text-soft: var(--text-mid);
+          --hero-line: var(--border);
+          --hero-outline: var(--blue);
+          --hero-outline-hover: var(--blue-50);
+          --hero-feature-bg: var(--gold-50);
+          --hero-feature-icon: var(--blue);
         }
-      }
 
-      @media (max-width: 520px) {
-        .rek-hero .hero-container { padding: 36px var(--gutter) 32px; }
-        .rek-hero .hero-title { font-size: 34px; line-height: 1.08; }
-        .rek-hero .hero-badge { font-size: 11px; }
-        .rek-description { margin-bottom: 20px; font-size: 14px; }
-        .rek-benefits { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 12px; width: 100%; max-width: 360px; margin: 0 auto 24px; }
-        .rek-benefit { align-items: center; gap: 8px; text-align: center; }
-        .rek-benefit:last-child { grid-column: 1 / -1; }
-        .rek-benefit-icon { flex-shrink: 0; width: 40px; height: 40px; }
-        .rek-benefit strong { font-size: 13px; }
-        .rek-benefit small { max-width: 160px; margin: 2px auto 0; font-size: 12px; }
-        .rek-actions { flex-direction: column; align-items: center; gap: 10px; width: 100%; }
-        .rek-hero .hero-btn { width: 100%; max-width: 360px; }
-        .rek-hero .store-buttons { flex-wrap: nowrap; gap: 8px; width: 100%; max-width: 360px; margin-inline: auto; }
-        .rek-hero .store-btn { flex: 1; min-width: 0; padding: 8px; }
-      }
-    ` }} />
-  </section>
-);
+        .hero-container {
+          width: 100%;
+          max-width: var(--container-max);
+          margin-inline: auto;
+          padding: clamp(28px, 3.5vw, 48px) var(--gutter) clamp(28px, 3vw, 40px);
+        }
+
+        .hero-content {
+          display: flex;
+          align-items: center;
+          min-height: clamp(400px, 38vw, 520px);
+        }
+
+        .hero-text {
+          position: relative;
+          z-index: 2;
+          display: flex;
+          flex: 0 0 50%;
+          flex-direction: column;
+          justify-content: center;
+          max-width: 540px;
+        }
+
+        .hero-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          width: fit-content;
+          margin-bottom: 20px;
+          padding: 6px 13px;
+          border-radius: 999px;
+          background: var(--gold);
+          color: var(--blue);
+          font-size: 12.5px;
+          font-weight: 700;
+        }
+
+        .hero-title {
+          margin-bottom: 20px;
+          color: var(--hero-text);
+          font-size: clamp(38px, 4.2vw, 60px);
+          font-weight: 800;
+          line-height: 1.04;
+          letter-spacing: -0.035em;
+        }
+        .hero-title span { display: block; }
+        .hero-title .hero-accent { color: var(--gold); }
+        .hero--light .hero-title .hero-accent { color: var(--gold-dark); }
+
+        .hero-sub {
+          max-width: 440px;
+          margin-bottom: 26px;
+          color: var(--hero-text-soft);
+          font-size: 16px;
+          line-height: 1.6;
+        }
+
+        .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; }
+
+        .hero-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 9px;
+          min-height: 48px;
+          padding: 0 22px;
+          border-radius: 999px;
+          font-size: 14.5px;
+          font-weight: 700;
+          cursor: pointer;
+          transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s var(--ease);
+        }
+        .hero-btn-primary { border: 0; background: var(--gold); color: var(--blue); }
+        .hero-btn-primary:hover { background: #F8D255; transform: translateY(-1px); }
+        .hero-btn-outline { border: 1.5px solid var(--hero-outline); background: transparent; color: var(--hero-text); }
+        .hero-btn-outline:hover { background: var(--hero-outline-hover); }
+
+        .store-buttons { display: flex; flex-wrap: wrap; gap: 10px; }
+        .store-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          min-width: 144px;
+          min-height: 46px;
+          padding: 0 16px;
+          border: 1px solid rgba(255, 255, 255, 0.28);
+          border-radius: 12px;
+          background: #000;
+          color: #fff;
+          text-decoration: none;
+          transition: transform 0.2s var(--ease), border-color 0.2s ease;
+        }
+        .store-btn:hover { transform: translateY(-1px); border-color: rgba(255, 255, 255, 0.55); }
+        .store-text { display: flex; flex-direction: column; line-height: 1.1; }
+        .store-text small { font-size: 10px; opacity: 0.75; }
+        .store-text strong { font-size: 15px; font-weight: 700; }
+
+        /* Visuel : à droite du texte, jusqu'au bord de l'écran, bords fondus dans le fond. */
+        .hero-image img {
+          display: block;
+          width: 100%;
+          height: auto;
+          -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%), linear-gradient(to right, transparent 0%, #000 10%);
+          -webkit-mask-composite: source-in;
+          mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%), linear-gradient(to right, transparent 0%, #000 10%);
+          mask-composite: intersect;
+        }
+        @media (min-width: 1025px) {
+          .hero-image {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 46%;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            pointer-events: none;
+          }
+          .hero-image img { width: auto; max-width: 100%; max-height: min(100%, 720px); }
+        }
+
+        .hero-features {
+          position: relative;
+          z-index: 2;
+          display: grid;
+          grid-template-columns: repeat(var(--count), minmax(0, 1fr));
+          margin-top: 32px;
+          padding-top: 24px;
+          border-top: 1px solid var(--hero-line);
+          list-style: none;
+        }
+        .hero-feature {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 0 20px;
+          border-left: 1px solid var(--hero-line);
+          color: var(--hero-text);
+        }
+        .hero-feature:first-child { padding-left: 0; border-left: 0; }
+        .hero-feature-icon {
+          display: grid;
+          flex-shrink: 0;
+          place-items: center;
+          width: 40px;
+          height: 40px;
+          border-radius: 12px;
+          background: var(--hero-feature-bg);
+          color: var(--hero-feature-icon);
+        }
+        .hero-feature strong { display: block; font-size: 14px; font-weight: 700; }
+        .hero-feature strong + span { display: block; margin-top: 2px; font-size: 12.5px; opacity: 0.75; }
+
+        @media (max-width: 1024px) {
+          .hero { min-height: auto; }
+          .hero-content { flex-direction: column; gap: 28px; min-height: 0; text-align: center; }
+          .hero-text { flex: none; align-items: center; max-width: 600px; }
+          .hero-sub { margin-inline: auto; }
+          .hero-actions, .store-buttons { justify-content: center; }
+          .hero-image { width: 100%; max-width: 640px; margin-inline: auto; }
+          .hero-image img {
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 12%, #000 88%, transparent 100%), linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+            mask-image: linear-gradient(to bottom, transparent 0%, #000 12%, #000 88%, transparent 100%), linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+          }
+          .hero-features { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 0; text-align: left; }
+          .hero-feature:nth-child(odd) { padding-left: 0; border-left: 0; }
+          .hero-feature:last-child:nth-child(odd) { grid-column: 1 / -1; justify-content: center; }
+        }
+
+        @media (max-width: 520px) {
+          .hero-title { font-size: 36px; line-height: 1.06; }
+          .hero-actions, .store-buttons { flex-direction: column; width: 100%; max-width: 340px; }
+          .hero-btn, .store-btn { width: 100%; }
+          .store-btn { justify-content: center; min-height: 52px; }
+          .hero-feature { gap: 10px; padding: 0 10px; }
+          .hero-feature-icon { width: 36px; height: 36px; border-radius: 10px; }
+          .hero-feature strong { font-size: 12.5px; }
+          .hero-feature strong + span { display: none; }
+        }
+
+        @media (max-width: 380px) {
+          .hero-badge { font-size: 11px; }
+        }
+      ` }} />
+    </section>
+  );
+};
 
 export default Hero;
